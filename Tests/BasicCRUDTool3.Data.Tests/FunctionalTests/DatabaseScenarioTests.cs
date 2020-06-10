@@ -21,8 +21,8 @@ namespace BasicCRUDTool3.Data.Tests.FunctionalTests
         public void CanConnectToDataBase()
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory());
-                //.AddUserSecrets<AppSettings>();
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddUserSecrets<Appsettings>();
 
             var configuration = builder.Build();
 
@@ -41,6 +41,10 @@ namespace BasicCRUDTool3.Data.Tests.FunctionalTests
                 }
             }
 
+        }
+
+        public class Appsettings
+        {
         }
     }
 }

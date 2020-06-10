@@ -40,10 +40,6 @@ namespace BasicCRUDTool3.Data.Models
 
                 entity.Property(e => e.AlbumId).ValueGeneratedNever();
 
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(160);
-
                 entity.HasOne(d => d.Artist)
                     .WithMany(p => p.Album)
                     .HasForeignKey(d => d.ArtistId)
@@ -54,8 +50,6 @@ namespace BasicCRUDTool3.Data.Models
             modelBuilder.Entity<Artist>(entity =>
             {
                 entity.Property(e => e.ArtistId).ValueGeneratedNever();
-
-                entity.Property(e => e.Name).HasMaxLength(120);
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -64,34 +58,6 @@ namespace BasicCRUDTool3.Data.Models
                     .HasName("IFK_CustomerSupportRepId");
 
                 entity.Property(e => e.CustomerId).ValueGeneratedNever();
-
-                entity.Property(e => e.Address).HasMaxLength(70);
-
-                entity.Property(e => e.City).HasMaxLength(40);
-
-                entity.Property(e => e.Company).HasMaxLength(80);
-
-                entity.Property(e => e.Country).HasMaxLength(40);
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(60);
-
-                entity.Property(e => e.Fax).HasMaxLength(24);
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(40);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.Phone).HasMaxLength(24);
-
-                entity.Property(e => e.PostalCode).HasMaxLength(10);
-
-                entity.Property(e => e.State).HasMaxLength(40);
 
                 entity.HasOne(d => d.SupportRep)
                     .WithMany(p => p.Customer)
@@ -106,32 +72,6 @@ namespace BasicCRUDTool3.Data.Models
 
                 entity.Property(e => e.EmployeeId).ValueGeneratedNever();
 
-                entity.Property(e => e.Address).HasMaxLength(70);
-
-                entity.Property(e => e.City).HasMaxLength(40);
-
-                entity.Property(e => e.Country).HasMaxLength(40);
-
-                entity.Property(e => e.Email).HasMaxLength(60);
-
-                entity.Property(e => e.Fax).HasMaxLength(24);
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.Phone).HasMaxLength(24);
-
-                entity.Property(e => e.PostalCode).HasMaxLength(10);
-
-                entity.Property(e => e.State).HasMaxLength(40);
-
-                entity.Property(e => e.Title).HasMaxLength(30);
-
                 entity.HasOne(d => d.ReportsToNavigation)
                     .WithMany(p => p.InverseReportsToNavigation)
                     .HasForeignKey(d => d.ReportsTo)
@@ -141,8 +81,6 @@ namespace BasicCRUDTool3.Data.Models
             modelBuilder.Entity<Genre>(entity =>
             {
                 entity.Property(e => e.GenreId).ValueGeneratedNever();
-
-                entity.Property(e => e.Name).HasMaxLength(120);
             });
 
             modelBuilder.Entity<Invoice>(entity =>
@@ -151,18 +89,6 @@ namespace BasicCRUDTool3.Data.Models
                     .HasName("IFK_InvoiceCustomerId");
 
                 entity.Property(e => e.InvoiceId).ValueGeneratedNever();
-
-                entity.Property(e => e.BillingAddress).HasMaxLength(70);
-
-                entity.Property(e => e.BillingCity).HasMaxLength(40);
-
-                entity.Property(e => e.BillingCountry).HasMaxLength(40);
-
-                entity.Property(e => e.BillingPostalCode).HasMaxLength(10);
-
-                entity.Property(e => e.BillingState).HasMaxLength(40);
-
-                entity.Property(e => e.Total).HasColumnType("numeric(10,2)");
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Invoice)
@@ -181,8 +107,6 @@ namespace BasicCRUDTool3.Data.Models
 
                 entity.Property(e => e.InvoiceLineId).ValueGeneratedNever();
 
-                entity.Property(e => e.UnitPrice).HasColumnType("numeric(10,2)");
-
                 entity.HasOne(d => d.Invoice)
                     .WithMany(p => p.InvoiceLine)
                     .HasForeignKey(d => d.InvoiceId)
@@ -199,15 +123,11 @@ namespace BasicCRUDTool3.Data.Models
             modelBuilder.Entity<MediaType>(entity =>
             {
                 entity.Property(e => e.MediaTypeId).ValueGeneratedNever();
-
-                entity.Property(e => e.Name).HasMaxLength(120);
             });
 
             modelBuilder.Entity<Playlist>(entity =>
             {
                 entity.Property(e => e.PlaylistId).ValueGeneratedNever();
-
-                entity.Property(e => e.Name).HasMaxLength(120);
             });
 
             modelBuilder.Entity<PlaylistTrack>(entity =>
@@ -242,14 +162,6 @@ namespace BasicCRUDTool3.Data.Models
                     .HasName("IFK_TrackMediaTypeId");
 
                 entity.Property(e => e.TrackId).ValueGeneratedNever();
-
-                entity.Property(e => e.Composer).HasMaxLength(220);
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.UnitPrice).HasColumnType("numeric(10,2)");
 
                 entity.HasOne(d => d.Album)
                     .WithMany(p => p.Track)
