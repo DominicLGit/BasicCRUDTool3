@@ -1,2 +1,3 @@
 before_build:
+  - cd Src
   - nuget restore
