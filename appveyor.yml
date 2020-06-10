@@ -1,10 +1,11 @@
 before_build:
   - SET PGUSER=postgres
   - SET PGPASSWORD=Password12!
+  - SET PGDATABASE=CRUDTestDB
   - cd "C:\\Program Files\\PostgreSQL\\9.6\\bin\\"
-  - psql -f C:\\projects\\basiccrudtool3\\Resources\\Chinook_PostgreSql.sql
-  - cd C:\\projects\\basiccrudtool3
-  - cd ..\Src
+  - createdb CRUDTestDB
+  - psql -q -f C:\\projects\\basiccrudtool3\\Resources\\Chinook_PostgreSql.sql
+  - cd C:\\projects\\basiccrudtool3\\Src
   - nuget restore
   
 services:
