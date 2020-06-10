@@ -16,4 +16,4 @@ environment:
     secure: /j7KLdZuSN7ukT698JVqmAVBEYgI4xALwEEInwz8ureU7JmS/Z9IMUWPVRgYoTUc
     
 test_script:
- - dotnet test --collect:"XPlat Code Coverage"
+ - dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
