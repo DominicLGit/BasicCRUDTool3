@@ -10,3 +10,10 @@ before_build:
   
 services:
   - postgresql
+  
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: /j7KLdZuSN7ukT698JVqmAVBEYgI4xALwEEInwz8ureU7JmS/Z9IMUWPVRgYoTUc
+    
+test_script:
+ - dotnet test --collect:"XPlat Code Coverage"
