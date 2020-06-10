@@ -3,10 +3,7 @@ before_build:
   - SET PGUSER=postgres
   - SET PGPASSWORD=Password12!
   - cd "C:\\Program Files\\PostgreSQL\\9.6\\bin\\"
-  - psql.exe
-  - \i C:\\projects\\basiccrudtool3\\Resouces\\Chinook_PostgreSql.sql
-  - SELECT * FROM Album LIMIT 5
-  - \q
+  - psql -f C:\\projects\\basiccrudtool3\\Resouces\\Chinook_PostgreSql.sql
   - cd C:\\projects\\basiccrudtool3
   - cd ..\Src
   - nuget restore
