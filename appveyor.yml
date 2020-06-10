@@ -1,9 +1,8 @@
 before_build:
-  - DIR
   - SET PGUSER=postgres
   - SET PGPASSWORD=Password12!
   - cd "C:\\Program Files\\PostgreSQL\\9.6\\bin\\"
-  - psql -f C:\\projects\\basiccrudtool3\\Resouces\\Chinook_PostgreSql.sql
+  - psql -f C:\\projects\\basiccrudtool3\\Resources\\Chinook_PostgreSql.sql
   - cd C:\\projects\\basiccrudtool3
   - cd ..\Src
   - nuget restore
