@@ -19,7 +19,7 @@ environment:
 test_script:
  - dotnet test --collect:"XPlat Code Coverage" -r C:\\projects\\basiccrudtool3\\Tests\\Results
  
- after_test:
+after_test:
  - cd C:\\projects\\basiccrudtool3\\Tests
  - cmd: python .\moveCoverageResults.py
  - cd C:\\projects\\basiccrudtool3\\Tests\\Results
