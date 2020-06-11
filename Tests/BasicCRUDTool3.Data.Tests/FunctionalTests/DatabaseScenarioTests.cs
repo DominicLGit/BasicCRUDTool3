@@ -26,7 +26,6 @@ namespace BasicCRUDTool3.Data.Tests.FunctionalTests
 
             var configuration = builder.Build();
 
-
             using NpgsqlConnection conn = new NpgsqlConnection("Host=localhost;Database=CRUDTestDB;Username=postgres;Password=Password12!");
             {
                 try

@@ -14,6 +14,7 @@ services:
 environment:
   COVERALLS_REPO_TOKEN:
     secure: /j7KLdZuSN7ukT698JVqmAVBEYgI4xALwEEInwz8ureU7JmS/Z9IMUWPVRgYoTUc
+  COVERALLS_SERVICE_NAME: appveyor
     
 test_script:
  - dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
