@@ -17,4 +17,7 @@ environment:
   COVERALLS_SERVICE_NAME: appveyor
     
 test_script:
- - dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+ - dotnet test --collect:"XPlat Code Coverage" -r C:\\projects\\basiccrudtool3\\Tests\\Results
+ 
+ after_test:
+ - ..\..\Tools\reportgenerator\4.6.1\tools\netcoreapp3.0\ReportGenerator.exe "-reports:2coverage.cobertura.xml;coverage.cobertura.xml;3coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Cobertura
