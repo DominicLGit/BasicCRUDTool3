@@ -19,15 +19,14 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="ReportGenerator" Version="4.6.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Src\DesktopClient\BasicCRUDTool3.WPFDesktop\BasicCRUDTool3.WPFDesktop.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="FunctionalTests\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\DesktopClient\BasicCRUDTool3.Business\BasicCRUDTool3.Business.csproj" />
   </ItemGroup>
 
 </Project>

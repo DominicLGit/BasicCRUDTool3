@@ -42,6 +42,7 @@ namespace BasicCRUDTool3.Data.Tests.FunctionalTests
 
         }
 
+
         public class Appsettings
         {
         }
