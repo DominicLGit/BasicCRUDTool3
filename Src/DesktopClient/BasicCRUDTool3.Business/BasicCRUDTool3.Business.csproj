@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\Users\Dominic\source\repos\BasicCRUDTool3\Build\</OutputPath>
+  </PropertyGroup>
+
 </Project>
