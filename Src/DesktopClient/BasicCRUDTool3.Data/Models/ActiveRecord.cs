@@ -3,6 +3,11 @@ using System.Runtime.Serialization;
 
 namespace BasicCRUDTool3.Data.Models
 {
+    /// <summary>
+    /// Base active record class that binds to EFCore entity
+    /// </summary>
+    /// <typeparam name="TEntity">EFCore entity</typeparam>
+    /// <typeparam name="TKey">Primary key for entity</typeparam>
     public abstract class ActiveRecord<TEntity, TKey> where TEntity : class, new()
     {
         #region Protected members
@@ -15,11 +20,13 @@ namespace BasicCRUDTool3.Data.Models
         public TKey Id { get; protected set; }
         #endregion
 
+        #region Constructors
         protected ActiveRecord(ICRUDTestDBContextProvider cRUDTestDBProvider)
         {
             CRUDTestDBProvider = cRUDTestDBProvider;
             Context = cRUDTestDBProvider.GetContext();
         }
+        #endregion
 
         #region Public Methods
         public virtual void Load(TKey id)
@@ -31,7 +38,7 @@ namespace BasicCRUDTool3.Data.Models
             }
             else
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException($"Entity type {typeof(TEntity).FullName} with key {Id} does not exist.");
             }
         }
 

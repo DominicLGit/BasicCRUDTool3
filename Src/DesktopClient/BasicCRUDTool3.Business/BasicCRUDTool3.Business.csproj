@@ -8,4 +8,8 @@
     <OutputPath>C:\Users\Dominic\source\repos\BasicCRUDTool3\Build\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BasicCRUDTool3.Data\BasicCRUDTool3.Data.csproj" />
+  </ItemGroup>
+
 </Project>
