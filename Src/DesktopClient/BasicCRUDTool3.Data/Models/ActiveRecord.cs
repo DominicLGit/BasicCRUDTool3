@@ -21,6 +21,7 @@ namespace BasicCRUDTool3.Data.Models
             Context = cRUDTestDBProvider.GetContext();
         }
 
+        #region Public Methods
         public virtual void Load(TKey id)
         {
             Entity = Context.Find<TEntity>(id);
@@ -39,5 +40,25 @@ namespace BasicCRUDTool3.Data.Models
             Entity = new TEntity();
             Context.Add(Entity);
         }
+
+        /// <summary>
+        /// Deletes Entity from Context and updates database immediately 
+        /// </summary>
+        public virtual void Delete()
+        {
+            if (Entity == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            Context.Remove(Entity);
+            Context.SaveChanges();
+        }
+
+        public virtual void Save()
+        {
+            Context.SaveChanges();
+        }
+        #endregion
     }
 }
