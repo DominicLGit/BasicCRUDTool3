@@ -9,8 +9,8 @@ namespace BasicCRUDTool3.Business
     public class ArtistBE : BusinessEntity<Artist, int>
     {
         #region Public Properties
-        public string Name { get; private set; }
-        public int AlbumCount { get; private set }
+        public string Name { get; set; }
+        public int AlbumCount { get; private set; }
         #endregion
         #region Constructors
         public ArtistBE(ICRUDTestDBContextProvider cRUDTestDBContext) : base(cRUDTestDBContext)
