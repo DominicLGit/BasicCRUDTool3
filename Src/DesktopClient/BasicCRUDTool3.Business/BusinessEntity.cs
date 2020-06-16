@@ -16,6 +16,11 @@ namespace BasicCRUDTool3.Business
         }
         #endregion
 
+        public virtual bool IsValid()
+        {
+            return IsValid(out _);
+        }
+
         public virtual bool IsValid(out IEnumerable<ValidationResult> validationResults)
         {
             var context = new ValidationContext(this);

@@ -11,7 +11,7 @@ namespace BasicCRUDTool3.Data.Models
     public abstract class ActiveRecord<TEntity, TKey> where TEntity : class, new()
     {
         #region Protected members
-        protected readonly ICRUDTestDBContextProvider CRUDTestDBProvider;
+        protected readonly ICRUDTestDBContextProvider CRUDTestDBContextProvider;
         protected readonly CRUDTestDBContext Context;
         protected TEntity Entity;
         #endregion
@@ -21,10 +21,10 @@ namespace BasicCRUDTool3.Data.Models
         #endregion
 
         #region Constructors
-        protected ActiveRecord(ICRUDTestDBContextProvider cRUDTestDBProvider)
+        protected ActiveRecord(ICRUDTestDBContextProvider cRUDTestDBContextProvider)
         {
-            CRUDTestDBProvider = cRUDTestDBProvider;
-            Context = cRUDTestDBProvider.GetContext();
+            CRUDTestDBContextProvider = cRUDTestDBContextProvider;
+            Context = cRUDTestDBContextProvider.GetContext();
         }
         #endregion
 
