@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BasicCRUDTool3.Business
 {
-    public class AlbumBE : BusinessEntity<Album, int>
+    public class AlbumBE : BusinessEntity<Album, int>, IAssignToBusinessEntity<ArtistBE>
     {
         #region Public Properties
         public string Title { get; private set; }
@@ -38,6 +38,11 @@ namespace BasicCRUDTool3.Business
             track.AssignTo(this);
         }
 
+        public void AssignTo(ArtistBE artist)
+        {
+            Entity.ArtistId = artist.Id;
+        }
+
         public override void Load(int id)
         {
             base.Load(id);
@@ -45,8 +50,6 @@ namespace BasicCRUDTool3.Business
             Title = Entity.Title;
             ArtistName = Entity.Artist.Name;
             TrackCount = Entity.Track.Count();
-
-
         }
 
         public override string ToString()

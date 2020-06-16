@@ -10,6 +10,7 @@ namespace BasicCRUDTool3.Data.Models
     /// <typeparam name="TKey">Primary key for entity</typeparam>
     public abstract class ActiveRecord<TEntity, TKey> where TEntity : class, new()
     {
+        //TODO: Add IDisposable interface
         #region Protected members
         protected readonly ICRUDTestDBContextProvider CRUDTestDBContextProvider;
         protected readonly CRUDTestDBContext Context;
