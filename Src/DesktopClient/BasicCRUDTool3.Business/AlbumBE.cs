@@ -9,7 +9,7 @@ namespace BasicCRUDTool3.Business
     public class AlbumBE : BusinessEntity<Album, int>, IAssignToBusinessEntity<ArtistBE>
     {
         #region Public Properties
-        public string Title { get; private set; }
+        public string Title { get; set; }
         public string ArtistName { get; private set; }
         public int TrackCount { get; private set;  }
         #endregion
@@ -49,7 +49,7 @@ namespace BasicCRUDTool3.Business
 
             Title = Entity.Title;
             ArtistName = Entity.Artist.Name;
-            TrackCount = Entity.Track.Count();
+            TrackCount = Entity.Track.Count;
         }
 
         public override string ToString()
