@@ -47,6 +47,17 @@ namespace BasicCRUDTool3.Business
             TrackCount = Entity.Track.Count;
         }
 
+        public override void Save()
+        {
+            Entity.Name = Name;
+            base.Save();
+
+            if (Id == default)
+            {
+                Id = Entity.MediaTypeId;
+            }
+        }
+
         public override string ToString()
         {
             return Name;

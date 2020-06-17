@@ -55,6 +55,17 @@ namespace BasicCRUDTool3.Business
             TrackCount = Entity.Track.Count;
         }
 
+        public override void Save()
+        {
+            Entity.Title = Title;
+            base.Save();
+
+            if (Id == default)
+            {
+                Id = Entity.AlbumId;
+            }
+        }
+
         public override string ToString()
         {
             return Title;

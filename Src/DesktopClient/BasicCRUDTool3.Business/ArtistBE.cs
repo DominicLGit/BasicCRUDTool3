@@ -45,6 +45,17 @@ namespace BasicCRUDTool3.Business
             AlbumCount = Entity.Album.Count;
         }
 
+        public override void Save()
+        {
+            Entity.Name = Name;
+            base.Save();
+
+            if (Id == default)
+            {
+                Id = Entity.ArtistId;
+            }
+        }
+
         public override string ToString()
         {
             return Name;

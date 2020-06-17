@@ -1,6 +1,7 @@
 ﻿using BasicCRUDTool3.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -12,7 +13,13 @@ namespace BasicCRUDTool3.Business
         IAssignToBusinessEntity<GenreBE>
     {
         #region Public Properties
+        [Required]
+        [StringLength(200)]
         public string Name { get; set; }
+        [StringLength(220)]
+        public string Composer { get; set; }
+        [Range(0, int.MaxValue)]
+        public int Milliseconds { get; set; }
         public string AlbumTitle { get; private set; }
         public string MediaTypeName { get; private set; }
         public string GenreName { get; private set; }
@@ -27,31 +34,31 @@ namespace BasicCRUDTool3.Business
         #endregion
 
         #region Public Methods
-/*        public IEnumerable<TrackBE> GetPlaylistTracks()
+       public IEnumerable<PlaylistTrackBE> GetPlaylistTracks()
         {
-            //TODO: Add support for multiple primary key values
-            var ids = Context.PlaylistTrack.Where(p => p.TrackId == Id).Select(p = > p.)
-            var ids = Context.Track.Where(p => p.AlbumId == Id).Select(p => p.TrackId);
+            var ids = Context.PlaylistTrack.Where(p => p.TrackId == Id)
+                .Select(p => new { p.PlaylistId, p.TrackId})
+                .ToList()
+                .Select(p => (p.PlaylistId, p.TrackId));
 
             foreach (var id in ids)
             {
-                var item = new TrackBE(CRUDTestDBContextProvider);
+                var item = new PlaylistTrackBE(CRUDTestDBContextProvider);
                 item.Load(id);
                 yield return item;
             }
         }
-        public IEnumerable<TrackBE> GetInvoiceLines()
+        public IEnumerable<InvoiceLineBE> GetInvoiceLines()
         {
-            var ids = Context.Track.Where(p => p.AlbumId == Id).Select(p => p.TrackId);
-            var ids = Context.Track.Where(p => p.AlbumId == Id).Select(p => p.TrackId);
+            var ids = Context.InvoiceLine.Where(p => p.TrackId == Id).Select(p => p.InvoiceLineId);
 
             foreach (var id in ids)
             {
-                var item = new TrackBE(CRUDTestDBContextProvider);
+                var item = new InvoiceLineBE(CRUDTestDBContextProvider);
                 item.Load(id);
                 yield return item;
             }
-        }*/
+        }
         public void AssignTo(AlbumBE album)
         {
             Entity.AlbumId = album.Id;
@@ -62,9 +69,9 @@ namespace BasicCRUDTool3.Business
             Entity.MediaTypeId = mediaType.Id;
         }
 
-        public void AssignTo(GenreBE businessEntity)
+        public void AssignTo(GenreBE genreBE)
         {
-            throw new NotImplementedException();
+            Entity.GenreId = genreBE.Id;
         }
 
         public override void Load(int id)
@@ -72,11 +79,26 @@ namespace BasicCRUDTool3.Business
             base.Load(id);
 
             Name = Entity.Name;
+            Composer = Entity.Composer;
+            Milliseconds = Entity.Milliseconds;
             AlbumTitle = Entity.Album.Title;
             MediaTypeName = Entity.MediaType.Name;
             GenreName = Entity.Genre.Name;
             PlaylistTrackCount = Entity.PlaylistTrack.Count;
             InvoiceLineCount = Entity.InvoiceLine.Count;
+        }
+
+        public override void Save()
+        {
+            Entity.Name = Name;
+            Entity.Composer = Composer;
+            Entity.Milliseconds = Milliseconds;
+            base.Save();
+
+            if (Id == default)
+            {
+                Id = Entity.TrackId;
+            }
         }
 
         public override string ToString()
