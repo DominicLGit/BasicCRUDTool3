@@ -24,7 +24,7 @@ namespace BasicCRUDTool3.Data.Tests.FunctionalTests
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddUserSecrets<Appsettings>();
 
-            var configuration = builder.Build();
+            builder.Build();
 
             using NpgsqlConnection conn = new NpgsqlConnection("Host=localhost;Database=CRUDTestDB;Username=postgres;Password=Password12!");
             {

@@ -18,7 +18,7 @@ namespace BasicCRUDTool3.WPFDesktop
         public CRUDTestDBContext GetContext()
         {
             var option = new DbContextOptionsBuilder<CRUDTestDBContext>()
-                .UseNpgsql("Host=localhost;Database=CRUDTestDB;Username=postgres;Password=Password12!");
+                .UseInMemoryDatabase("CRUDTestDB");
 
             return new CRUDTestDBContext(option.Options);
         }
