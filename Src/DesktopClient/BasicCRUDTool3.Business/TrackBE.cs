@@ -59,6 +59,11 @@ namespace BasicCRUDTool3.Business
                 yield return item;
             }
         }
+        public void AddTPlaylistTrack(PlaylistTrackBE playlistTrack)
+        {
+            playlistTrack.AssignTo(this);
+        }
+
         public void AssignTo(AlbumBE album)
         {
             Entity.AlbumId = album.Id;
