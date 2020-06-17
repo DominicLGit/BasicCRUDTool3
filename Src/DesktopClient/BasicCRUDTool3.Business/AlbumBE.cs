@@ -1,6 +1,7 @@
 ﻿using BasicCRUDTool3.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -9,6 +10,8 @@ namespace BasicCRUDTool3.Business
     public class AlbumBE : BusinessEntity<Album, int>, IAssignToBusinessEntity<ArtistBE>
     {
         #region Public Properties
+        [Required]
+        [StringLength(160)]
         public string Title { get; set; }
         public string ArtistName { get; private set; }
         public int TrackCount { get; private set;  }

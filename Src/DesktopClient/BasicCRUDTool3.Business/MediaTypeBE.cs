@@ -1,6 +1,7 @@
 ﻿using BasicCRUDTool3.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -9,6 +10,7 @@ namespace BasicCRUDTool3.Business
     public class MediaTypeBE : BusinessEntity<MediaType, int>
     {
         #region Public Properties
+        [StringLength(120)]
         public string Name { get;  set; }
         public int TrackCount { get; private set; }
         #endregion
