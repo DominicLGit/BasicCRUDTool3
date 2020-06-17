@@ -14,6 +14,7 @@ namespace BasicCRUDTool3.Business
         public string Name { get; set; }
         public int AlbumCount { get; private set; }
         #endregion
+
         #region Constructors
         public ArtistBE(ICRUDTestDBContextProvider cRUDTestDBContext) : base(cRUDTestDBContext)
         {

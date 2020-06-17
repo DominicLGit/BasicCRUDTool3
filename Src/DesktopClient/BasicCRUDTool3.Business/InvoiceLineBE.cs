@@ -8,7 +8,8 @@ using System.Text;
 namespace BasicCRUDTool3.Business
 {
     public class InvoiceLineBE : BusinessEntity<InvoiceLine, int>,
-        IAssignToBusinessEntity<TrackBE>
+        IAssignToBusinessEntity<TrackBE>,
+        IAssignToBusinessEntity<InvoiceBE>
     {
         #region Public Properties
         public int Quantity { get; set; }
@@ -23,9 +24,14 @@ namespace BasicCRUDTool3.Business
         }
         #endregion
         #region Public Methods
-        public void AssignTo(TrackBE trackBE)
+        public void AssignTo(TrackBE track)
         {
-            Entity.TrackId = trackBE.Id;
+            Entity.TrackId = track.Id;
+        }
+
+        public void AssignTo(InvoiceBE invoice)
+        {
+            Entity.InvoiceId = invoice.Id;
         }
         public override void Load(int id)
         {

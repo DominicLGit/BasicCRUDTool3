@@ -59,9 +59,14 @@ namespace BasicCRUDTool3.Business
                 yield return item;
             }
         }
-        public void AddTPlaylistTrack(PlaylistTrackBE playlistTrack)
+        public void AddToPlaylistTrack(PlaylistTrackBE playlistTrack)
         {
             playlistTrack.AssignTo(this);
+        }
+
+        public void AddToInvoiceLine(InvoiceLineBE invoiceLine)
+        {
+            invoiceLine.AssignTo(this);
         }
 
         public void AssignTo(AlbumBE album)
@@ -74,9 +79,9 @@ namespace BasicCRUDTool3.Business
             Entity.MediaTypeId = mediaType.Id;
         }
 
-        public void AssignTo(GenreBE genreBE)
+        public void AssignTo(GenreBE genre)
         {
-            Entity.GenreId = genreBE.Id;
+            Entity.GenreId = genre.Id;
         }
 
         public override void Load(int id)
