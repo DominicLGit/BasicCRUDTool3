@@ -68,8 +68,8 @@ namespace BasicCRUDTool3.Business
             BillingPostalCode = Entity.BillingPostalCode;
             Total = Entity.Total;
             InvoiceLineCount = Entity.InvoiceLine.Count;
-            CustomerFirstName = Entity.Customer.FirstName;
-            CustomerLastName = Entity.Customer.LastName;
+            CustomerFirstName = Entity.Customer?.FirstName;
+            CustomerLastName = Entity.Customer?.LastName;
         }
 
         public override void Save()
@@ -79,6 +79,7 @@ namespace BasicCRUDTool3.Business
             Entity.BillingCity = BillingCity;
             Entity.BillingState = BillingState;
             Entity.BillingCountry = BillingCountry;
+            Entity.BillingPostalCode = BillingPostalCode;
             Entity.Total = Total;
             base.Save();
 
