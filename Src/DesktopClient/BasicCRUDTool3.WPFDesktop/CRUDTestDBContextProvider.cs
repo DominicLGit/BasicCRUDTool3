@@ -35,7 +35,8 @@ namespace BasicCRUDTool3.WPFDesktop
 
 
             var option = new DbContextOptionsBuilder<CRUDTestDBContext>()
-                .UseNpgsql(new SqlConnection(builder.ConnectionString, new SqlCredential(UserID, SecurePassword)));
+                .UseNpgsql(new SqlConnection(builder.ConnectionString, new SqlCredential(UserID, SecurePassword)))
+                .UseLazyLoadingProxies();
 
             return new CRUDTestDBContext(option.Options);
         }
