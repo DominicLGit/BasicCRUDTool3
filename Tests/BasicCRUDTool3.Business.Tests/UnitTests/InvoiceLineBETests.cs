@@ -1,5 +1,4 @@
 ﻿using BasicCRUDTool3.Data.Models;
-using BasicCRUDTool3.WPFDesktop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;

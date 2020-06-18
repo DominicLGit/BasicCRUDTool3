@@ -1,5 +1,4 @@
 ﻿using BasicCRUDTool3.Data.Models;
-using BasicCRUDTool3.WPFDesktop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
     public class InvoiceBETests
     {
         [ClassInitialize]
-        public void InvoiceBETestsIntialise()
+        public static void InvoiceBETestsIntialise(TestContext testContext)
         {
             CRUDTestDBContext context = new CRUDTestDBContextProvider().GetContext();
             var customer = new Customer {
@@ -19,7 +18,12 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
                 FirstName = "TestFirstName",
                 LastName = "TestLastName", 
                 Email = "test@test.com"};
-            var invoice = new Invoice { Customer = customer, }
+            var invoice = new Invoice { CustomerId = 1, InvoiceId = 1, BillingAddress = "123 Test Street"};
+            var invoiceLine = new InvoiceLine { InvoiceId = 1, InvoiceLineId = 1 };
+            context.Add(customer);
+            context.Add(invoice);
+            context.Add(invoiceLine);
+            context.SaveChanges();
         }
 
         [TestMethod]
@@ -39,6 +43,18 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(invoiceBE.IsValid());
             invoiceBE.Total = -1.00M;
             Assert.IsFalse(invoiceBE.IsValid());
+        }
+
+        [TestMethod]
+        public void LoadTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
+            InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
+            invoiceBE.Load(1);
+            Assert.IsTrue(invoiceBE.Id == 1);
+            Assert.IsTrue(invoiceBE.BillingAddress == "123 Test Street");
+            Assert.IsTrue(invoiceBE.CustomerFirstName == "TestFirstName");
+            Assert.IsTrue(invoiceBE.CustomerLastName == "TestLastName");
         }
     }
 }

@@ -60,7 +60,6 @@ namespace BasicCRUDTool3.Business
         public override void Load(int id)
         {
             base.Load(id);
-
             InvoiceDate = Entity.InvoiceDate;
             BillingAddress = Entity.BillingAddress;
             BillingCity = Entity.BillingCity;
