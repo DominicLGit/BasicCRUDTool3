@@ -1,4 +1,5 @@
 ﻿using BasicCRUDTool3.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,14 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             context.Add(invoiceLineInvoiceLineCountTest);
 
             context.SaveChanges();
+        }
+
+        [ClassCleanup]
+        public static void CleanUp()
+        {
+            CRUDTestDBContext context = new CRUDTestDBContextProvider().GetContext();
+            context.Database.EnsureDeleted();
+            context.Dispose();
         }
 
         [TestMethod]

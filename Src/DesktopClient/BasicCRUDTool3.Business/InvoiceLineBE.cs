@@ -39,6 +39,7 @@ namespace BasicCRUDTool3.Business
             base.Load(id);
 
             Quantity = Entity.Quantity;
+            UnitPrice = Entity.UnitPrice;
         }
 
         public override void Save()
