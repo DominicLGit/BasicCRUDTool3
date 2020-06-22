@@ -19,15 +19,19 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
                 FirstName = "TestFirstName",
                 LastName = "TestLastName", 
                 Email = "test@test.com"};
-            var invoice = new Invoice { CustomerId = 1, InvoiceId = 1, BillingAddress = "123 Test Street"};
-            var invoice2 = new Invoice { InvoiceId = 2 };
-            var invoiceLine = new InvoiceLine { InvoiceLineId = 1, InvoiceId = 1, Quantity = 10 };
-            var invoiceLine2 = new InvoiceLine {InvoiceLineId = 2, Quantity = 20 };
+            var invoiceAddToInvoiceLineTest = new Invoice { InvoiceId = 5 };
+            var invoiceGetInvoiceLinesTest = new Invoice { InvoiceId = 4 };
+            var invoiceLoadValidIdTest = new Invoice { CustomerId = 1, InvoiceId = 2, BillingAddress = "123 Test Street"};
+            var invoiceSaveValidIdTest = new Invoice { InvoiceId = 3 };
+            var invoiceLineGetInvoiceLinesTes = new InvoiceLine { InvoiceLineId = 1, InvoiceId = 4, Quantity = 10 };
+            var invoiceLineAddToInvoiceLineTest = new InvoiceLine {InvoiceLineId = 2, Quantity = 20 };
             context.Add(customer);
-            context.Add(invoice);
-            context.Add(invoice2);
-            context.Add(invoiceLine);
-            context.Add(invoiceLine2);
+            context.Add(invoiceGetInvoiceLinesTest);
+            context.Add(invoiceLoadValidIdTest);
+            context.Add(invoiceSaveValidIdTest);
+            context.Add(invoiceLineGetInvoiceLinesTes);
+            context.Add(invoiceLineAddToInvoiceLineTest);
+            context.Add(invoiceAddToInvoiceLineTest);
             context.SaveChanges();
         }
 
@@ -55,8 +59,8 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
             InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
-            invoiceBE.Load(1);
-            Assert.IsTrue(invoiceBE.Id == 1);
+            invoiceBE.Load(2);
+            Assert.IsTrue(invoiceBE.Id == 2);
             Assert.IsTrue(invoiceBE.BillingAddress == "123 Test Street");
             Assert.IsTrue(invoiceBE.CustomerFirstName == "TestFirstName");
             Assert.IsTrue(invoiceBE.CustomerLastName == "TestLastName");
@@ -67,7 +71,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
             InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
-            invoiceBE.Load(2);
+            invoiceBE.Load(3);
             invoiceBE.BillingAddress = "234 Test Street";
             invoiceBE.BillingCity = "TestCity 232";
             invoiceBE.BillingCountry = "TestCountry 43534";
@@ -78,7 +82,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             invoiceBE.Save();
 
             InvoiceBE invoiceBE2 = new InvoiceBE(cRUDTestDBContextProvider);
-            invoiceBE2.Load(2);
+            invoiceBE2.Load(3);
             Assert.IsTrue(invoiceBE2.BillingAddress == "234 Test Street");
             Assert.IsTrue(invoiceBE2.BillingCity == "TestCity 232");
             Assert.IsTrue(invoiceBE2.BillingCountry == "TestCountry 43534");
@@ -89,11 +93,22 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         }
 
         [TestMethod]
+        public void SaveWithoutIdTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
+            InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
+            invoiceBE.New();
+            invoiceBE.Save();
+
+            Assert.IsTrue(invoiceBE.Id != default);
+        }
+
+        [TestMethod]
         public void GetInvoiceLinesTest()
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
             InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
-            invoiceBE.Load(1);
+            invoiceBE.Load(4);
             var invoiceLineBECollection = invoiceBE.GetInvoiceLines();
             Assert.IsTrue(invoiceLineBECollection.First().GetType() == typeof(InvoiceLineBE));
             Assert.IsTrue(invoiceLineBECollection.First().Quantity == 10);
@@ -106,12 +121,12 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
             InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
             InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
-            invoiceBE.Load(1);
+            invoiceBE.Load(5);
             invoiceLineBE.Load(2);
             invoiceBE.AddToInvoiceLine(invoiceLineBE);
             invoiceLineBE.Save();
 
-            invoiceBE.Load(1);
+            invoiceBE.Load(5);
             var InvoiceLineBECollection = invoiceBE.GetInvoiceLines().Where(p => p.Id == 2);
             Assert.IsTrue(InvoiceLineBECollection.First().Id == 2);
         }

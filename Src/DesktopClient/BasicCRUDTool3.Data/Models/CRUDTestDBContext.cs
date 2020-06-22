@@ -38,7 +38,7 @@ namespace BasicCRUDTool3.Data.Models
                 entity.HasIndex(e => e.ArtistId)
                     .HasName("IFK_AlbumArtistId");
 
-                entity.Property(e => e.AlbumId).ValueGeneratedNever();
+                //entity.Property(e => e.AlbumId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Artist)
                     .WithMany(p => p.Album)
@@ -49,7 +49,7 @@ namespace BasicCRUDTool3.Data.Models
 
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.Property(e => e.ArtistId).ValueGeneratedNever();
+                //entity.Property(e => e.ArtistId).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -57,7 +57,7 @@ namespace BasicCRUDTool3.Data.Models
                 entity.HasIndex(e => e.SupportRepId)
                     .HasName("IFK_CustomerSupportRepId");
 
-                entity.Property(e => e.CustomerId).ValueGeneratedNever();
+                //entity.Property(e => e.CustomerId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.SupportRep)
                     .WithMany(p => p.Customer)
@@ -70,7 +70,7 @@ namespace BasicCRUDTool3.Data.Models
                 entity.HasIndex(e => e.ReportsTo)
                     .HasName("IFK_EmployeeReportsTo");
 
-                entity.Property(e => e.EmployeeId).ValueGeneratedNever();
+                //entity.Property(e => e.EmployeeId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.ReportsToNavigation)
                     .WithMany(p => p.InverseReportsToNavigation)
@@ -80,7 +80,7 @@ namespace BasicCRUDTool3.Data.Models
 
             modelBuilder.Entity<Genre>(entity =>
             {
-                entity.Property(e => e.GenreId).ValueGeneratedNever();
+                //entity.Property(e => e.GenreId).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<Invoice>(entity =>
@@ -88,7 +88,7 @@ namespace BasicCRUDTool3.Data.Models
                 entity.HasIndex(e => e.CustomerId)
                     .HasName("IFK_InvoiceCustomerId");
 
-                entity.Property(e => e.InvoiceId).ValueGeneratedNever();
+                //entity.Property(e => e.InvoiceId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Invoice)
@@ -105,7 +105,7 @@ namespace BasicCRUDTool3.Data.Models
                 entity.HasIndex(e => e.TrackId)
                     .HasName("IFK_InvoiceLineTrackId");
 
-                entity.Property(e => e.InvoiceLineId).ValueGeneratedNever();
+                //entity.Property(e => e.InvoiceLineId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Invoice)
                     .WithMany(p => p.InvoiceLine)
@@ -122,12 +122,12 @@ namespace BasicCRUDTool3.Data.Models
 
             modelBuilder.Entity<MediaType>(entity =>
             {
-                entity.Property(e => e.MediaTypeId).ValueGeneratedNever();
+                //entity.Property(e => e.MediaTypeId).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<Playlist>(entity =>
             {
-                entity.Property(e => e.PlaylistId).ValueGeneratedNever();
+                //entity.Property(e => e.PlaylistId).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<PlaylistTrack>(entity =>
@@ -161,7 +161,7 @@ namespace BasicCRUDTool3.Data.Models
                 entity.HasIndex(e => e.MediaTypeId)
                     .HasName("IFK_TrackMediaTypeId");
 
-                entity.Property(e => e.TrackId).ValueGeneratedNever();
+                //entity.Property(e => e.TrackId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.Album)
                     .WithMany(p => p.Track)
