@@ -11,32 +11,10 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
     [TestClass]
     public class InvoiceLineBETests
     {
-        [ClassInitialize]
-        public static void InvoiceLineBETestsIntialise(TestContext testContext)
-        {
-            CRUDTestDBContext context = new CRUDTestDBContextProvider().GetContext();
-            //var invoiceLoadValidIdTest = new Invoice { CustomerId = 1, InvoiceId = 2, BillingAddress = "123 Test Street" };
-            //var invoiceSaveValidIdTest = new Invoice { InvoiceId = 3 };
-            var invoiceLineLoadValidIdTest = new InvoiceLine { InvoiceLineId = 5 , Quantity = 10, UnitPrice = 20};
-            //context.Add(invoiceLoadValidIdTest);
-            //context.Add(invoiceSaveValidIdTest);
-            context.Add(invoiceLineLoadValidIdTest);
-
-            context.SaveChanges();
-        }
-
-        [ClassCleanup]
-        public static void CleanUp()
-        {
-            CRUDTestDBContext context = new CRUDTestDBContextProvider().GetContext();
-            context.Database.EnsureDeleted();
-            context.Dispose();
-        }
-
         [TestMethod]
         public void UnitPriceValidation()
         {
-            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
             invoiceLineBE.UnitPrice = 1.11M;
             Assert.IsTrue(invoiceLineBE.IsValid());
@@ -55,12 +33,50 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         [TestMethod]
         public void LoadValidIdTest()
         {
-            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider();
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var invoiceLineLoadValidIdTest = new InvoiceLine { InvoiceLineId = 1, Quantity = 10, UnitPrice = 20 };
+            context.Add(invoiceLineLoadValidIdTest);
+            context.SaveChanges();
+
             InvoiceLineBE invoiceLine = new InvoiceLineBE(cRUDTestDBContextProvider);
-            invoiceLine.Load(5);
-            Assert.IsTrue(invoiceLine.Id == 5);
+            invoiceLine.Load(1);
+            Assert.IsTrue(invoiceLine.Id == 1);
             Assert.IsTrue(invoiceLine.Quantity == 10);
             Assert.IsTrue(invoiceLine.UnitPrice == 20);
+        }
+
+        [TestMethod]
+        public void SaveValidIdTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var invoiceLineLoadValidIdTest = new InvoiceLine { InvoiceLineId = 1 };
+            context.Add(invoiceLineLoadValidIdTest);
+            context.SaveChanges();
+
+            InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
+            invoiceLineBE.Load(1);
+            invoiceLineBE.Quantity = 15;
+            invoiceLineBE.UnitPrice = 10;
+            invoiceLineBE.Save();
+
+            InvoiceLineBE invoiceLineBE2 = new InvoiceLineBE(cRUDTestDBContextProvider);
+            invoiceLineBE2.Load(1);
+            Assert.IsTrue(invoiceLineBE2.Id == 1);
+            Assert.IsTrue(invoiceLineBE2.Quantity == 15);
+            Assert.IsTrue(invoiceLineBE2.UnitPrice == 10);
+        }
+
+        [TestMethod]
+        public void SaveWithoutIdTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
+            invoiceLineBE.New();
+            invoiceLineBE.Save();
+
+            Assert.IsTrue(invoiceLineBE.Id != default);
         }
     }
 }

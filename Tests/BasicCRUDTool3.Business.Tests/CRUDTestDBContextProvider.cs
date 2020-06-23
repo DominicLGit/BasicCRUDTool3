@@ -16,10 +16,15 @@ namespace BasicCRUDTool3.Business.Tests
 {
     public class CRUDTestDBContextProvider : ICRUDTestDBContextProvider
     {
+        public string databaseID;
+        public CRUDTestDBContextProvider(string databaseID)
+        {
+            this.databaseID = databaseID;
+        }
         public CRUDTestDBContext GetContext()
         {
             var option = new DbContextOptionsBuilder<CRUDTestDBContext>()
-                .UseInMemoryDatabase("CRUDTestDB")
+                .UseInMemoryDatabase(databaseID)
                 .UseLazyLoadingProxies();
 
             return new CRUDTestDBContext(option.Options);
