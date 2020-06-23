@@ -178,8 +178,6 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
 
             InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
             invoiceBE.Load(1);
-            Console.WriteLine(invoiceBE.InvoiceDate.ToString("dd/MM/yyyy"));
-            Console.WriteLine(invoiceBE.ToString());
             Assert.IsTrue(invoiceBE.ToString().Equals("Invoice ID: 1 Customer Name:TestFirstName TestLastName Date:01/01/2020"));
         }
     }

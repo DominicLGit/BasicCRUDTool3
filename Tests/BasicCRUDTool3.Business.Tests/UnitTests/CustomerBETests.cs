@@ -127,26 +127,68 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         }
 
         [TestMethod]
-        public void AddToInvoiceLineTest()
+        public void AddToInvoiceTest()
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var invoiceAddToInvoiceLineTest = new Invoice { InvoiceId = 5 };
-            var invoiceLineAddToInvoiceLineTest = new InvoiceLine { InvoiceLineId = 2, Quantity = 20 };
-            context.Add(invoiceAddToInvoiceLineTest);
-            context.Add(invoiceLineAddToInvoiceLineTest);
+            var customerAddToInvoiceTest = new Customer { CustomerId = 1 };
+            var invoiceAddToInvoiceTest = new Invoice { InvoiceId = 1, Total = 20 };
+            context.Add(customerAddToInvoiceTest);
+            context.Add(invoiceAddToInvoiceTest);
             context.SaveChanges();
 
-            InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
+            CustomerBE customerBE = new CustomerBE(cRUDTestDBContextProvider);
             InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
-            invoiceBE.Load(5);
-            invoiceLineBE.Load(2);
-            invoiceBE.AddToInvoiceLine(invoiceLineBE);
-            invoiceLineBE.Save();
+            invoiceBE.Load(1);
+            customerBE.Load(1);
+            customerBE.AddToInvoice(invoiceBE);
+            invoiceBE.Save();
 
-            invoiceBE.Load(5);
-            var InvoiceLineBECollection = invoiceBE.GetInvoiceLines().Where(p => p.Id == 2);
-            Assert.IsTrue(InvoiceLineBECollection.First().Id == 2);
+            customerBE.Load(1);
+            var InvoiceBECollection = customerBE.GetInvoices().Where(p => p.Id == 1);
+            Assert.IsTrue(InvoiceBECollection.First().Id == 1);
+        }
+
+        [TestMethod]
+        public void InvoiceCountTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var invoiceInvoiceCountTest = new Invoice { InvoiceId = 1, CustomerId = 1 };
+            var customerInvoiceCountTest = new Customer { CustomerId = 1 };
+            context.Add(invoiceInvoiceCountTest);
+            context.Add(customerInvoiceCountTest);
+            context.SaveChanges();
+
+            CustomerBE customerBE = new CustomerBE(cRUDTestDBContextProvider);
+            customerBE.Load(1);
+            Assert.IsTrue(customerBE.InvoiceCount == 1);
+
+            InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
+            invoiceBE.New();
+            customerBE.AddToInvoice(invoiceBE);
+            invoiceBE.Save();
+
+            CustomerBE customerBE2 = new CustomerBE(cRUDTestDBContextProvider);
+            customerBE2.Load(1);
+            Assert.IsTrue(customerBE2.InvoiceCount == 2);
+        }
+
+        [TestMethod]
+        public void ToStringTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var customerToStringTest = new Customer { CustomerId = 1, 
+                FirstName = "TestFirstName",
+                LastName = "TestLastName",
+                Email = "Test@test.com" };
+            context.Add(customerToStringTest);
+            context.SaveChanges();
+
+            CustomerBE customerBE = new CustomerBE(cRUDTestDBContextProvider);
+            customerBE.Load(1);
+            Assert.IsTrue(customerBE.ToString().Equals("Customer Name:TestFirstName TestLastName Email:Test@test.com"));
         }
     }
 }
