@@ -91,9 +91,9 @@ namespace BasicCRUDTool3.Business
             Name = Entity.Name;
             Composer = Entity.Composer;
             Milliseconds = Entity.Milliseconds;
-            AlbumTitle = Entity.Album.Title;
-            MediaTypeName = Entity.MediaType.Name;
-            GenreName = Entity.Genre.Name;
+            AlbumTitle = Entity.Album?.Title;
+            MediaTypeName = Entity.MediaType?.Name;
+            GenreName = Entity.Genre?.Name;
             PlaylistTrackCount = Entity.PlaylistTrack.Count;
             InvoiceLineCount = Entity.InvoiceLine.Count;
         }

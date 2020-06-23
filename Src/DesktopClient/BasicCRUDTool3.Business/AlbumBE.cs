@@ -51,7 +51,7 @@ namespace BasicCRUDTool3.Business
             base.Load(id);
 
             Title = Entity.Title;
-            ArtistName = Entity.Artist.Name;
+            ArtistName = Entity.Artist?.Name;
             TrackCount = Entity.Track.Count;
         }
 

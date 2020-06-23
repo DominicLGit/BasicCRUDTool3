@@ -35,8 +35,10 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var invoiceLineLoadValidIdTest = new InvoiceLine { InvoiceLineId = 1, Quantity = 10, UnitPrice = 20 };
+            var invoiceLineLoadValidIdTest = new InvoiceLine { InvoiceLineId = 1, TrackId = 1, Quantity = 10, UnitPrice = 20 };
+            var trackLoadValidIdTest = new Track { TrackId = 1, Name = "TestTrackName" };
             context.Add(invoiceLineLoadValidIdTest);
+            context.Add(trackLoadValidIdTest);
             context.SaveChanges();
 
             InvoiceLineBE invoiceLine = new InvoiceLineBE(cRUDTestDBContextProvider);
@@ -44,6 +46,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(invoiceLine.Id == 1);
             Assert.IsTrue(invoiceLine.Quantity == 10);
             Assert.IsTrue(invoiceLine.UnitPrice == 20);
+            Assert.IsTrue(invoiceLine.TrackName == "TestTrackName");
         }
 
         [TestMethod]
@@ -77,6 +80,24 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             invoiceLineBE.Save();
 
             Assert.IsTrue(invoiceLineBE.Id != default);
+        }
+
+        [TestMethod]
+        public void ToStringTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var invoiceToStringTest = new InvoiceLine { InvoiceLineId = 1, TrackId = 1, Quantity = 10};
+            var trackToStringTest = new Track { TrackId = 1,  Name = "TestTrackName"};
+            context.Add(invoiceToStringTest);
+            context.Add(trackToStringTest);
+            context.SaveChanges();
+
+            InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
+            invoiceLineBE.Load(1);
+
+
+            Assert.IsTrue(invoiceLineBE.ToString() == "Track Name: TestTrackName Quantity: 10");
         }
     }
 }

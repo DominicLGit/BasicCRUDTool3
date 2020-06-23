@@ -40,6 +40,7 @@ namespace BasicCRUDTool3.Business
 
             Quantity = Entity.Quantity;
             UnitPrice = Entity.UnitPrice;
+            TrackName = Entity.Track?.Name;
         }
 
         public override void Save()
