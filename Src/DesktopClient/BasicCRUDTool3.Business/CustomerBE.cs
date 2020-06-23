@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -65,7 +66,10 @@ namespace BasicCRUDTool3.Business
 
         public void AssignTo(EmployeeBE employee)
         {
+            Debug.Write(Entity.SupportRepId.ToString());
             Entity.SupportRepId = employee.Id;
+            Debug.Write(Entity.SupportRepId.ToString());
+            Debug.Write(employee.Id.ToString());
         }
 
         public override void Load(int id)
@@ -100,7 +104,6 @@ namespace BasicCRUDTool3.Business
             Entity.Phone = Phone;
             Entity.Fax = Fax;
             Entity.Email = Email;
-            Entity.SupportRepId = SupportRepId;
             base.Save();
 
             if (Id == default)

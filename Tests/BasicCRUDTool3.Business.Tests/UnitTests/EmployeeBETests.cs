@@ -153,5 +153,28 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(customerBECollection.First().FirstName == "Test");
             Assert.IsTrue(customerBECollection.First().Id == 1);
         }
+
+        [TestMethod]
+        public void AddToCustomersTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var customer = new Customer { CustomerId = 1, FirstName = "TestFirst", LastName = "TestLast", Email = "Test"};
+            var employee = new Employee { EmployeeId = 1, FirstName = "TesteFirst", LastName = "TesteLast", Email = "eTest" };
+            context.Add(customer);
+            context.Add(employee);
+            context.SaveChanges();
+
+            CustomerBE customerBE = new CustomerBE(cRUDTestDBContextProvider);
+            EmployeeBE employeeBE = new EmployeeBE(cRUDTestDBContextProvider);
+            employeeBE.Load(1);
+            customerBE.Load(1);
+            employeeBE.AddToCustomer(customerBE);
+            customerBE.Save();
+
+            employeeBE.Load(1);
+            var customerBECollection = employeeBE.GetCustomers();
+            Assert.IsTrue(customerBECollection.First().Id == 1);
+        }
     }
 }
