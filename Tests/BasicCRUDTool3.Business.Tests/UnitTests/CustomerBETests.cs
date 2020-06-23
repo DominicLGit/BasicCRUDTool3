@@ -1,4 +1,5 @@
 ﻿using BasicCRUDTool3.Data.Models;
+using Castle.Core.Internal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -114,16 +115,21 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             var context = cRUDTestDBContextProvider.GetContext();
             var invoiceGetInvoicesTest = new Invoice { InvoiceId = 1, CustomerId = 1, Total = 10};
             var customerGetInvoicesTest = new Customer { CustomerId = 1};
+            var customer2GetInvoicesTest = new Customer { CustomerId = 2 };
             context.Add(invoiceGetInvoicesTest);
             context.Add(customerGetInvoicesTest);
+            context.Add(customer2GetInvoicesTest);
             context.SaveChanges();
 
             CustomerBE customerBE = new CustomerBE(cRUDTestDBContextProvider);
+            CustomerBE customerBE2 = new CustomerBE(cRUDTestDBContextProvider);
             customerBE.Load(1);
+            customerBE2.Load(2);
             var invoiceBECollection = customerBE.GetInvoices();
             Assert.IsTrue(invoiceBECollection.First().GetType() == typeof(InvoiceBE));
             Assert.IsTrue(invoiceBECollection.First().Total == 10);
             Assert.IsTrue(invoiceBECollection.First().Id == 1);
+            Assert.IsTrue(customerBE2.GetInvoices().IsNullOrEmpty());
         }
 
         [TestMethod]

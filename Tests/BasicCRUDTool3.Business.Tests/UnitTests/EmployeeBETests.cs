@@ -1,4 +1,5 @@
 ﻿using BasicCRUDTool3.Data.Models;
+using Castle.Core.Internal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -142,16 +143,21 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
                 Email = "Test" };
 
             var EmployeeGetCustomersTest = new Employee { EmployeeId = 1, FirstName = "TestFirst", LastName = "TestLast" };
+            var EmployeeGetCustomersTest2 = new Employee { EmployeeId = 2, FirstName = "TestFirst", LastName = "TestLast" };
             context.Add(customerGetCustomersTest);
             context.Add(EmployeeGetCustomersTest);
+            context.Add(EmployeeGetCustomersTest2);
             context.SaveChanges();
 
             EmployeeBE employeeBE = new EmployeeBE(cRUDTestDBContextProvider);
+            EmployeeBE employeeBE2 = new EmployeeBE(cRUDTestDBContextProvider);
             employeeBE.Load(1);
+            employeeBE2.Load(2);
             var customerBECollection = employeeBE.GetCustomers();
             Assert.IsTrue(customerBECollection.First().GetType() == typeof(CustomerBE));
             Assert.IsTrue(customerBECollection.First().FirstName == "Test");
             Assert.IsTrue(customerBECollection.First().Id == 1);
+            Assert.IsTrue(employeeBE2.GetCustomers().IsNullOrEmpty());
         }
 
         [TestMethod]
