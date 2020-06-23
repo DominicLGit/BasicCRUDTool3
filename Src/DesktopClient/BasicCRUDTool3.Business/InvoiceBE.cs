@@ -91,7 +91,7 @@ namespace BasicCRUDTool3.Business
 
         public override string ToString()
         {
-            return $"Invoice ID: {Id} Customer Name:{CustomerFirstName} {CustomerLastName} Date:{InvoiceDate}";
+            return $"Invoice ID: {Id} Customer Name:{CustomerFirstName} {CustomerLastName} Date:{InvoiceDate.ToShortDateString()}";
         }
         #endregion
     }
