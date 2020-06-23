@@ -125,5 +125,28 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(invoiceBECollection.First().Total == 10);
             Assert.IsTrue(invoiceBECollection.First().Id == 1);
         }
+
+        [TestMethod]
+        public void AddToInvoiceLineTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var invoiceAddToInvoiceLineTest = new Invoice { InvoiceId = 5 };
+            var invoiceLineAddToInvoiceLineTest = new InvoiceLine { InvoiceLineId = 2, Quantity = 20 };
+            context.Add(invoiceAddToInvoiceLineTest);
+            context.Add(invoiceLineAddToInvoiceLineTest);
+            context.SaveChanges();
+
+            InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
+            InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
+            invoiceBE.Load(5);
+            invoiceLineBE.Load(2);
+            invoiceBE.AddToInvoiceLine(invoiceLineBE);
+            invoiceLineBE.Save();
+
+            invoiceBE.Load(5);
+            var InvoiceLineBECollection = invoiceBE.GetInvoiceLines().Where(p => p.Id == 2);
+            Assert.IsTrue(InvoiceLineBECollection.First().Id == 2);
+        }
     }
 }
