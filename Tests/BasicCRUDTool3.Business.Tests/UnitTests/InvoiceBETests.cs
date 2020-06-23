@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -160,9 +161,24 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             invoiceLineBE.Save();
 
             InvoiceBE invoiceBe2 = new InvoiceBE(cRUDTestDBContextProvider);
-
             invoiceBe2.Load(6);
             Assert.IsTrue(invoiceBe2.InvoiceLineCount == 2);
+        }
+
+        [TestMethod]
+        public void ToStringTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var invoiceToStringTest = new Invoice { InvoiceId = 1, CustomerId = 1, InvoiceDate = new DateTime(2020, 1, 1) };
+            var customerToStringTest = new Customer { CustomerId = 1, FirstName = "TestFirstName", LastName = "TestLastName"};
+            context.Add(customerToStringTest);
+            context.Add(invoiceToStringTest);
+            context.SaveChanges();
+
+            InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
+            invoiceBE.Load(1);
+            Assert.IsTrue(invoiceBE.ToString() == "Invoice ID: 1 Customer Name:TestFirstName TestLastName Date:01/01/2020 00:00:00");
         }
     }
 }

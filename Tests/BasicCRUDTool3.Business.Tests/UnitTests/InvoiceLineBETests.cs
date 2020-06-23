@@ -87,9 +87,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var invoiceToStringTest = new InvoiceLine { InvoiceLineId = 1, TrackId = 1, Quantity = 10};
+            var invoiceLineToStringTest = new InvoiceLine { InvoiceLineId = 1, TrackId = 1, Quantity = 10};
             var trackToStringTest = new Track { TrackId = 1,  Name = "TestTrackName"};
-            context.Add(invoiceToStringTest);
+            context.Add(invoiceLineToStringTest);
             context.Add(trackToStringTest);
             context.SaveChanges();
 

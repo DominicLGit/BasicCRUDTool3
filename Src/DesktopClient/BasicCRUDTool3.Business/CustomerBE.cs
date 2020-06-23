@@ -36,7 +36,7 @@ namespace BasicCRUDTool3.Business
         [Required]
         [StringLength(60)]
         public string Email { get; set; }
-        public int? SupportRepId { get; set; }
+        public int? SupportRepId { get;  private set; }
         public int InvoiceCount { get; private set; }
         #endregion
 
