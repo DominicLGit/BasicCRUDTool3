@@ -175,6 +175,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             employeeBE.Load(1);
             var customerBECollection = employeeBE.GetCustomers();
             Assert.IsTrue(customerBECollection.First().Id == 1);
+            Assert.IsTrue(customerBECollection.First().SupportRepId == 1);
         }
     }
 }

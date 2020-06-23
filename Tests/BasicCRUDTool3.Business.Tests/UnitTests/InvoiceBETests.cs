@@ -138,6 +138,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             invoiceBE.Load(5);
             var InvoiceLineBECollection = invoiceBE.GetInvoiceLines().Where(p => p.Id == 2);
             Assert.IsTrue(InvoiceLineBECollection.First().Id == 2);
+            Assert.IsTrue(InvoiceLineBECollection.First().InvoiceId == 5);
         }
 
         [TestMethod]

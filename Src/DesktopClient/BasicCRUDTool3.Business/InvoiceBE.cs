@@ -13,6 +13,7 @@ namespace BasicCRUDTool3.Business
         #region Public Properties
         public string CustomerFirstName { get; private set; }
         public string CustomerLastName { get; private set; }
+        public int? CustomerID { get; private set; }
         public DateTime InvoiceDate { get; set; }
         [StringLength(70)]
         public string BillingAddress { get; set; }
@@ -68,6 +69,7 @@ namespace BasicCRUDTool3.Business
             BillingPostalCode = Entity.BillingPostalCode;
             Total = Entity.Total;
             InvoiceLineCount = Entity.InvoiceLine.Count;
+            CustomerID = Entity.CustomerId;
             CustomerFirstName = Entity.Customer?.FirstName;
             CustomerLastName = Entity.Customer?.LastName;
         }

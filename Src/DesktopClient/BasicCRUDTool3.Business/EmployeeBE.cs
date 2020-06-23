@@ -113,7 +113,6 @@ namespace BasicCRUDTool3.Business
             Entity.FirstName = FirstName;
             Entity.LastName = LastName;
             Entity.Title = Title;
-            Entity.ReportsTo = ReportsTo;
             Entity.BirthDate = BirthDate;
             Entity.HireDate = HireDate;
             Entity.Address = Address;
