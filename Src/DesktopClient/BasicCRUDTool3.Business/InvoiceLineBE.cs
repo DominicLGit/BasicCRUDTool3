@@ -13,6 +13,7 @@ namespace BasicCRUDTool3.Business
     {
         #region Public Properties
         public int? InvoiceId { get; private set; }
+        public int? TrackId { get; private set; }
         public int Quantity { get; set; }
         [Range(0, 9999999999)]
         [RegularExpression(@"^(0|-?\d{0,16}(\.\d{0,2})?)$")]
@@ -40,6 +41,7 @@ namespace BasicCRUDTool3.Business
             base.Load(id);
 
             InvoiceId = Entity.InvoiceId;
+            TrackId = Entity.TrackId;
             Quantity = Entity.Quantity;
             UnitPrice = Entity.UnitPrice;
             TrackName = Entity.Track?.Name;
