@@ -181,5 +181,30 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(InvoiceLineBECollection.First().TrackId == 1);
             Assert.IsTrue(trackBE2.GetInvoiceLines().IsNullOrEmpty());
         }
+
+        [TestMethod]
+        public void InvoiceLineCountTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var track = new Track { TrackId = 1 };
+            var invoiceLine = new InvoiceLine { InvoiceLineId = 1, TrackId = 1 };
+            context.Add(track);
+            context.Add(invoiceLine);
+            context.SaveChanges();
+
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.Load(1);
+            Assert.IsTrue(trackBE.InvoiceLineCount == 1);
+
+            InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
+            invoiceLineBE.New();
+            trackBE.AddToInvoiceLine(invoiceLineBE);
+            invoiceLineBE.Save();
+
+            TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
+            trackBE2.Load(1);
+            Assert.IsTrue(trackBE2.InvoiceLineCount == 2);
+        }
     }
 }
