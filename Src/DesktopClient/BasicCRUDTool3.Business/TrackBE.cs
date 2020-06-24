@@ -20,6 +20,9 @@ namespace BasicCRUDTool3.Business
         public string Composer { get; set; }
         [Range(0, int.MaxValue)]
         public int Milliseconds { get; set; }
+        public int? AlbumId { get; private set; }
+        public int? MediaTypeId { get; private set; }
+        public int? GenreId { get; private set; }
         public string AlbumTitle { get; private set; }
         public string MediaTypeName { get; private set; }
         public string GenreName { get; private set; }
@@ -91,6 +94,9 @@ namespace BasicCRUDTool3.Business
             Name = Entity.Name;
             Composer = Entity.Composer;
             Milliseconds = Entity.Milliseconds;
+            AlbumId = Entity.AlbumId;
+            MediaTypeId = Entity.MediaTypeId;
+            GenreId = Entity.GenreId;
             AlbumTitle = Entity.Album?.Title;
             MediaTypeName = Entity.MediaType?.Name;
             GenreName = Entity.Genre?.Name;
