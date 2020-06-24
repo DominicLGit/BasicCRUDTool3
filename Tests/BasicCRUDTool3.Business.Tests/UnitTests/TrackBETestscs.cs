@@ -126,5 +126,29 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
 
             Assert.IsTrue(trackBE.Id != default);
         }
+
+        [TestMethod]
+        public void GetInvoiceLinesTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var invoiceGetInvoiceLinesTest = new Invoice { InvoiceId = 4 };
+            var invoiceGetInvoiceLinesTest2 = new Invoice { InvoiceId = 1 };
+            var invoiceLineGetInvoiceLinesTest = new InvoiceLine { InvoiceLineId = 1, InvoiceId = 4, Quantity = 10 };
+            context.Add(invoiceGetInvoiceLinesTest);
+            context.Add(invoiceGetInvoiceLinesTest2);
+            context.Add(invoiceLineGetInvoiceLinesTest);
+            context.SaveChanges();
+
+            InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
+            InvoiceBE invoiceBE2 = new InvoiceBE(cRUDTestDBContextProvider);
+            invoiceBE.Load(4);
+            invoiceBE2.Load(1);
+            var invoiceLineBECollection = invoiceBE.GetInvoiceLines();
+            Assert.IsTrue(invoiceLineBECollection.First().GetType() == typeof(InvoiceLineBE));
+            Assert.IsTrue(invoiceLineBECollection.First().Quantity == 10);
+            Assert.IsTrue(invoiceLineBECollection.First().Id == 1);
+            Assert.IsTrue(invoiceBE2.GetInvoiceLines().IsNullOrEmpty());
+        }
     }
 }
