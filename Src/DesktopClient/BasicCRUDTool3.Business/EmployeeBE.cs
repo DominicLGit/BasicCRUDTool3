@@ -77,7 +77,7 @@ namespace BasicCRUDTool3.Business
             customer.AssignTo(this);
         }
 
-        public void AddToEmployee (EmployeeBE employee)
+        public void AddSubordinate (EmployeeBE employee)
         {
             employee.AssignTo(this);
         }
