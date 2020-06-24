@@ -39,22 +39,30 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             };
             var track3 = new Track
             {
-                TrackId = 1,
+                TrackId = 3,
                 Name = "TestTrackName",
                 Composer = "TestComposer",
                 Milliseconds = 1000,
-                AlbumId = 1,
-                MediaTypeId = 1,
-                GenreId = 1
+                AlbumId = 3,
+                MediaTypeId = 3,
+                GenreId = 3
 
             };
             var album = new Album { AlbumId = 1 , Title = "TestTitle"};
             var mediaType = new MediaType { MediaTypeId = 1 , Name = "TestMediaType"};
             var genre = new Genre { GenreId = 1, Name = "TestGenre" };
+            var album3 = new Album { AlbumId = 3, Title = "TestTitle" };
+            var mediaType3 = new MediaType { MediaTypeId = 3 };
+            var genre3 = new Genre { GenreId = 3 };
             context.Add(album);
             context.Add(mediaType);
             context.Add(genre);
             context.Add(track);
+            context.Add(track2);
+            context.Add(track3);
+            context.Add(album3);
+            context.Add(mediaType3);
+            context.Add(genre3);
             context.SaveChanges();
 
             TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
@@ -69,18 +77,18 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
 
             TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
             trackBE2.Load(2);
-            Assert.IsTrue(trackBE.Id == 2);
-            Assert.IsTrue(trackBE.Name == "TestTrackName");
-            Assert.IsTrue(trackBE.Composer == "TestComposer");
-            Assert.IsTrue(trackBE.Milliseconds == 1000);
+            Assert.IsTrue(trackBE2.Id == 2);
+            Assert.IsTrue(trackBE2.Name == "TestTrackName");
+            Assert.IsTrue(trackBE2.Composer == "TestComposer");
+            Assert.IsTrue(trackBE2.Milliseconds == 1000);
 
             TrackBE trackBE3 = new TrackBE(cRUDTestDBContextProvider);
             trackBE3.Load(3);
-            Assert.IsTrue(trackBE.Id == 3);
-            Assert.IsTrue(trackBE.Name == "TestTrackName");
-            Assert.IsTrue(trackBE.Composer == "TestComposer");
-            Assert.IsTrue(trackBE.Milliseconds == 1000);
-            Assert.IsTrue(trackBE.AlbumTitle == "TestTitle");
+            Assert.IsTrue(trackBE3.Id == 3);
+            Assert.IsTrue(trackBE3.Name == "TestTrackName");
+            Assert.IsTrue(trackBE3.Composer == "TestComposer");
+            Assert.IsTrue(trackBE3.Milliseconds == 1000);
+            Assert.IsTrue(trackBE3.AlbumTitle == "TestTitle");
         }
     }
 }
