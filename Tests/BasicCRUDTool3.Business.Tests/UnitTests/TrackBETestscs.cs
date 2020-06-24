@@ -1,7 +1,9 @@
 ﻿using BasicCRUDTool3.Data.Models;
+using Castle.Core.Internal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BasicCRUDTool3.Business.Tests.UnitTests
@@ -132,23 +134,23 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var invoiceGetInvoiceLinesTest = new Invoice { InvoiceId = 4 };
-            var invoiceGetInvoiceLinesTest2 = new Invoice { InvoiceId = 1 };
-            var invoiceLineGetInvoiceLinesTest = new InvoiceLine { InvoiceLineId = 1, InvoiceId = 4, Quantity = 10 };
-            context.Add(invoiceGetInvoiceLinesTest);
-            context.Add(invoiceGetInvoiceLinesTest2);
-            context.Add(invoiceLineGetInvoiceLinesTest);
+            var track = new Track { TrackId = 2 };
+            var track2 = new Track { TrackId = 1 };
+            var invoiceLine = new InvoiceLine { InvoiceLineId = 1, TrackId = 1, Quantity = 10 };
+            context.Add(track);
+            context.Add(track2);
+            context.Add(invoiceLine);
             context.SaveChanges();
 
-            InvoiceBE invoiceBE = new InvoiceBE(cRUDTestDBContextProvider);
-            InvoiceBE invoiceBE2 = new InvoiceBE(cRUDTestDBContextProvider);
-            invoiceBE.Load(4);
-            invoiceBE2.Load(1);
-            var invoiceLineBECollection = invoiceBE.GetInvoiceLines();
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.Load(1);
+            trackBE2.Load(2);
+            var invoiceLineBECollection = trackBE.GetInvoiceLines();
             Assert.IsTrue(invoiceLineBECollection.First().GetType() == typeof(InvoiceLineBE));
             Assert.IsTrue(invoiceLineBECollection.First().Quantity == 10);
             Assert.IsTrue(invoiceLineBECollection.First().Id == 1);
-            Assert.IsTrue(invoiceBE2.GetInvoiceLines().IsNullOrEmpty());
+            Assert.IsTrue(trackBE2.GetInvoiceLines().IsNullOrEmpty());
         }
     }
 }
