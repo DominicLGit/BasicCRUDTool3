@@ -90,5 +90,41 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(trackBE3.Milliseconds == 1000);
             Assert.IsTrue(trackBE3.AlbumTitle == "TestTitle");
         }
+
+        [TestMethod]
+        public void SaveValidIdTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var track = new Track { TrackId = 1 };
+            context.Add(track);
+            context.SaveChanges();
+
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.Load(1);
+            trackBE.Name = "TestTrackName";
+            trackBE.Composer = "TestComposer";
+            trackBE.Milliseconds = 1000;
+            trackBE.Save();
+
+            TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
+            trackBE2.Load(1);
+            Assert.IsTrue(trackBE2.Id == 1);
+            Assert.IsTrue(trackBE2.Name == "TestTrackName");
+            Assert.IsTrue(trackBE2.Composer == "TestComposer");
+            Assert.IsTrue(trackBE2.Milliseconds == 1000);
+        }
+
+        [TestMethod]
+        public void SaveWithoutIdTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.New();
+            trackBE.Name = "TestTrackName";
+            trackBE.Save();
+
+            Assert.IsTrue(trackBE.Id != default);
+        }
     }
 }
