@@ -140,7 +140,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
 
         /// <summary>
         /// Test for returning InvoiceLineBE objects related to record if relationship exists
-        /// Test for returning no PlaylistTRackBE objects related to record is relationships do not exist
+        /// Test for returning no InvoiceLineBE objects related to record is relationships do not exist
         /// </summary>
         [TestMethod]
         public void GetInvoiceLinesTest()
@@ -175,27 +175,22 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
             var track = new Track { TrackId = 1 };
-            var track2 = new Track { TrackId = 2 };
             var invoiceLine = new InvoiceLine { InvoiceLineId = 1, Quantity = 20 };
             context.Add(track);
-            context.Add(track2);
             context.Add(invoiceLine);
             context.SaveChanges();
 
             InvoiceLineBE invoiceLineBE = new InvoiceLineBE(cRUDTestDBContextProvider);
             TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
-            TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
             trackBE.Load(1);
             invoiceLineBE.Load(1);
             trackBE.AddToInvoiceLine(invoiceLineBE);
             invoiceLineBE.Save();
 
             trackBE.Load(1);
-            trackBE2.Load(2);
             var InvoiceLineBECollection = trackBE.GetInvoiceLines();
             Assert.IsTrue(InvoiceLineBECollection.First().Id == 1);
             Assert.IsTrue(InvoiceLineBECollection.First().TrackId == 1);
-            Assert.IsTrue(trackBE2.GetInvoiceLines().IsNullOrEmpty());
         }
 
         /// <summary>
