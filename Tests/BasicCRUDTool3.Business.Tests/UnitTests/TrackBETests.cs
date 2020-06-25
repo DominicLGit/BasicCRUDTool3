@@ -9,7 +9,7 @@ using System.Text;
 namespace BasicCRUDTool3.Business.Tests.UnitTests
 {
     [TestClass]
-    public class TrackBETestscs
+    public class TrackBETests
     {
         /// <summary>
         /// Test for loading existing object from database with all attributes
@@ -73,6 +73,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(trackBE.Name == "TestTrackName");
             Assert.IsTrue(trackBE.Composer == "TestComposer");
             Assert.IsTrue(trackBE.Milliseconds == 1000);
+            Assert.IsTrue(trackBE.AlbumId == 1);
+            Assert.IsTrue(trackBE.MediaTypeId == 1);
+            Assert.IsTrue(trackBE.GenreId == 1);
             Assert.IsTrue(trackBE.AlbumTitle == "TestTitle");
             Assert.IsTrue(trackBE.MediaTypeName == "TestMediaType");
             Assert.IsTrue(trackBE.GenreName == "TestGenre");
@@ -249,7 +252,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             var playlistTrackBECollection = trackBE.GetPlaylistTracks();
             Assert.IsTrue(playlistTrackBECollection.First().GetType() == typeof(PlaylistTrackBE));
             Assert.IsTrue(playlistTrackBECollection.First().Id == (1,1));
-            Assert.IsTrue(trackBE2.GetInvoiceLines().IsNullOrEmpty());
+            Assert.IsTrue(trackBE2.GetPlaylistTracks().IsNullOrEmpty());
         }
 
         /// <summary>
