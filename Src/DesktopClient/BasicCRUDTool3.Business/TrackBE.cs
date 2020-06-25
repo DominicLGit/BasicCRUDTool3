@@ -42,12 +42,12 @@ namespace BasicCRUDTool3.Business
             var ids = Context.PlaylistTrack.Where(p => p.TrackId == Id)
                 .Select(p => new { p.PlaylistId, p.TrackId})
                 .ToList()
-                .Select(p => (p.PlaylistId, p.TrackId));
+                .Select(p => ((int)p.PlaylistId, (int)p.TrackId ));
 
             foreach (var id in ids)
             {
                 var item = new PlaylistTrackBE(CRUDTestDBContextProvider);
-                item.Load(id);
+                item.Load(id, id.Item1, id.Item2);
                 yield return item;
             }
         }
@@ -119,7 +119,7 @@ namespace BasicCRUDTool3.Business
 
         public override string ToString()
         {
-            return Name;
+            return $"Title: {Name}";
         }
         #endregion
     }

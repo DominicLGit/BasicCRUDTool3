@@ -93,6 +93,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(trackBE3.AlbumTitle == "TestTitle");
         }
 
+        /// <summary>
+        /// Test for loading existing record via ID and saving it.
+        /// </summary>
         [TestMethod]
         public void SaveValidIdTest()
         {
@@ -117,6 +120,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(trackBE2.Milliseconds == 1000);
         }
 
+        /// <summary>
+        /// Test for creating new record and saving it. 
+        /// </summary>
         [TestMethod]
         public void SaveWithoutIdTest()
         {
@@ -129,6 +135,10 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(trackBE.Id != default);
         }
 
+        /// <summary>
+        /// Test for returning InvoiceLineBE objects related to record if relationship exists
+        /// Test for returning no PlaylistTRackBE objects related to record is relationships do not exist
+        /// </summary>
         [TestMethod]
         public void GetInvoiceLinesTest()
         {
@@ -153,6 +163,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(trackBE2.GetInvoiceLines().IsNullOrEmpty());
         }
 
+        /// <summary>
+        /// Test for adding new InvoiceLine relationship
+        /// </summary>
         [TestMethod]
         public void AddToInvoiceLineTest()
         {
@@ -182,6 +195,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(trackBE2.GetInvoiceLines().IsNullOrEmpty());
         }
 
+        /// <summary>
+        /// Test for accurate InvoiceLineCount
+        /// </summary>
         [TestMethod]
         public void InvoiceLineCountTest()
         {
@@ -205,6 +221,117 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
             trackBE2.Load(1);
             Assert.IsTrue(trackBE2.InvoiceLineCount == 2);
+        }
+
+        /// <summary>
+        /// Test for returning PlaylistTRackBE objects related to record if relationship exists
+        /// Test for returning no PlaylistTRackBE objects related to record is relationships do not exist
+        /// </summary>
+        [TestMethod]
+        public void GetPlaylistTracksTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var track = new Track { TrackId = 2 };
+            var track2 = new Track { TrackId = 1 };
+            var playlistTrack = new PlaylistTrack { PlaylistId = 1, TrackId = 1 };
+            var playlist = new Playlist { PlaylistId = 1 };
+            context.Add(track);
+            context.Add(track2);
+            context.Add(playlistTrack);
+            context.Add(playlist);
+            context.SaveChanges();
+
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.Load(1);
+            trackBE2.Load(2);
+            var playlistTrackBECollection = trackBE.GetPlaylistTracks();
+            Assert.IsTrue(playlistTrackBECollection.First().GetType() == typeof(PlaylistTrackBE));
+            Assert.IsTrue(playlistTrackBECollection.First().Id == (1,1));
+            Assert.IsTrue(trackBE2.GetInvoiceLines().IsNullOrEmpty());
+        }
+
+        /// <summary>
+        /// Test for adding new PlaylistTrack relationship
+        /// </summary>
+        [TestMethod]
+        public void AddToPlaylistTrackTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var track = new Track { TrackId = 1 };
+            var playlist = new Playlist { PlaylistId = 1 };
+            context.Add(track);
+            context.Add(playlist);
+            context.SaveChanges();
+
+            PlaylistTrackBE playlistTrackBE = new PlaylistTrackBE(cRUDTestDBContextProvider);
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            PlaylistBE playlistBE = new PlaylistBE(cRUDTestDBContextProvider);
+            trackBE.Load(1);
+            playlistBE.Load(1);
+            playlistTrackBE.New();
+            trackBE.AddToPlaylistTrack(playlistTrackBE);
+            playlistBE.AddToPlaylistTrack(playlistTrackBE);
+            playlistTrackBE.Save();
+
+            trackBE.Load(1);
+            var playlistTrackBECollection = trackBE.GetPlaylistTracks();
+            Assert.IsTrue(playlistTrackBECollection.First().PlaylistId == 1);
+            Assert.IsTrue(playlistTrackBECollection.First().TrackId == 1);
+        }
+
+        /// <summary>
+        /// Test for accurate PlaylistTrackCount
+        /// </summary>
+        [TestMethod]
+        public void PlaylistTrackCountTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var track = new Track { TrackId = 1 };
+            var playlist = new Playlist { PlaylistId = 1 };
+            var playlist2 = new Playlist { PlaylistId = 2 };
+            var playlistTrack = new PlaylistTrack { PlaylistId = 1, TrackId = 1 };
+            context.Add(track);
+            context.Add(playlist);
+            context.Add(playlist2);
+            context.Add(playlistTrack);
+            context.SaveChanges();
+
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.Load(1);
+            Assert.IsTrue(trackBE.PlaylistTrackCount == 1);
+
+            PlaylistTrackBE playlistTrackBE = new PlaylistTrackBE(cRUDTestDBContextProvider);
+            PlaylistBE playlistBE = new PlaylistBE(cRUDTestDBContextProvider);
+            playlistBE.Load(2);
+            playlistTrackBE.New();
+            trackBE.AddToPlaylistTrack(playlistTrackBE);
+            playlistBE.AddToPlaylistTrack(playlistTrackBE);
+            playlistTrackBE.Save();
+
+            TrackBE trackBE2 = new TrackBE(cRUDTestDBContextProvider);
+            trackBE2.Load(1);
+            Assert.IsTrue(trackBE2.PlaylistTrackCount == 2);
+        }
+
+        /// <summary>
+        /// Test for accurate ToString method
+        /// </summary>
+        [TestMethod]
+        public void ToStringTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var track = new Track { TrackId = 1, Name = "TestName" };
+            context.Add(track);
+            context.SaveChanges();
+
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.Load(1);
+            Assert.IsTrue(trackBE.ToString().Equals("Title: TestName"));
         }
     }
 }

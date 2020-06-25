@@ -27,17 +27,17 @@ namespace BasicCRUDTool3.Business
             var ids = Context.PlaylistTrack.Where(p=> p.PlaylistId == Id)
                 .Select(p => new { p.PlaylistId, p.TrackId})
                 .ToList()
-                .Select(p => (p.PlaylistId, p.TrackId));
+                .Select(p => ((int)p.PlaylistId, (int)p.TrackId));
 
             foreach (var id in ids)
             {
                 var item = new PlaylistTrackBE(CRUDTestDBContextProvider);
-                item.Load(id);
+                item.Load(id, id.Item1, id.Item2);
                 yield return item;
             }
         }
 
-        public void AddTPlaylistTrack(PlaylistTrackBE playlistTrack)
+        public void AddToPlaylistTrack(PlaylistTrackBE playlistTrack)
         {
             playlistTrack.AssignTo(this);
         }

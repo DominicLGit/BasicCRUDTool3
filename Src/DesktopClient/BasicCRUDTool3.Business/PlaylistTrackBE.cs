@@ -10,6 +10,8 @@ namespace BasicCRUDTool3.Business
         IAssignToBusinessEntity<PlaylistBE>
     {
         #region Public Properties
+        public int PlaylistId { get; private set; }
+        public int TrackId { get; private set; }
         public string TrackName { get; private set; }
         public string PlaylistName { get; private set; }
         #endregion
@@ -29,11 +31,13 @@ namespace BasicCRUDTool3.Business
         {
             Entity.PlaylistId = playlistBE.Id;
         }
-        public override void Load((int, int) id)
+        public override void Load((int, int) id, int firstKey, int SecondKey)
         {
 
-            base.Load(id);
+            base.Load(id, firstKey, SecondKey);
 
+            PlaylistId = Entity.PlaylistId;
+            TrackId = Entity.TrackId;
             TrackName = Entity.Track.Name;
             PlaylistName = Entity.Playlist.Name;
         }

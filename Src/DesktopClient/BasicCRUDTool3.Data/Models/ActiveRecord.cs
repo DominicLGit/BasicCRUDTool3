@@ -44,6 +44,19 @@ namespace BasicCRUDTool3.Data.Models
             }
         }
 
+        public virtual void Load(TKey id, int firstKey, int secondKey)
+        {
+            Entity = Context.Find<TEntity>( firstKey, secondKey);
+            if (Entity != null)
+            {
+                Id = id;
+            }
+            else
+            {
+                throw new InvalidOperationException($"Entity type {typeof(TEntity).FullName} with key {Id} does not exist.");
+            }
+        }
+
         public virtual void New()
         {
             Entity = new TEntity();
