@@ -122,7 +122,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         /// Test for adding new Track relationship
         /// </summary>
         [TestMethod]
-        public void AddToInvoiceLineTest()
+        public void AddToTrackTest()
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
@@ -139,13 +139,67 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
             trackBE.Load(1);
             genreBE.Load(1);
-            genreBE.AddTrack(trackBE);
+            genreBE.AddToTrack(trackBE);
             trackBE.Save();
 
             genreBE.Load(1);
             var InvoiceLineBECollection = genreBE.GetTracks();
             Assert.IsTrue(InvoiceLineBECollection.First().Id == 1);
             Assert.IsTrue(InvoiceLineBECollection.First().GenreId == 1);
+        }
+
+        /// <summary>
+        /// Test for accurate TrackCount
+        /// </summary>
+        [TestMethod]
+        public void TrackCountTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var genre = new Genre
+            {
+                GenreId = 1
+            };
+            var track = new Track { TrackId = 1, GenreId = 1, Name = "TestTrackName" };
+            context.Add(genre);
+            context.Add(track);
+            context.SaveChanges();
+
+            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
+            genreBE.Load(1);
+            Assert.IsTrue(genreBE.TrackCount == 1);
+
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.New();
+            trackBE.Name = "TestName";
+            genreBE.AddToTrack(trackBE);
+            trackBE.Save();
+
+            GenreBE genreBE2 = new GenreBE(cRUDTestDBContextProvider);
+            genreBE2.Load(1);
+            Assert.IsTrue(genreBE2.TrackCount == 2);
+        }
+
+        /// <summary>
+        /// Test for accurate ToString method
+        /// </summary>
+        [TestMethod]
+        public void ToStringTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+
+            var genre = new Genre
+            {
+                GenreId = 1,
+                Name = "TestGenreName"
+            };
+            context.Add(genre);
+            context.SaveChanges();
+
+            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
+            genreBE.Load(1);
+            Assert.IsTrue(genreBE.ToString().Equals("GenreName: TestGenreName"));
         }
     }
 }

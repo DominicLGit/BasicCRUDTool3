@@ -34,7 +34,7 @@ namespace BasicCRUDTool3.Business
             }
         }
 
-        public void AddTrack(TrackBE track)
+        public void AddToTrack(TrackBE track)
         {
             track.AssignTo(this);
         }
@@ -59,7 +59,7 @@ namespace BasicCRUDTool3.Business
 
         public override string ToString()
         {
-            return Name;
+            return $"GenreName: {Name}";
         }
         #endregion
     }
