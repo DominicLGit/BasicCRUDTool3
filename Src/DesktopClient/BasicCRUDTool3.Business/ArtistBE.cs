@@ -34,7 +34,7 @@ namespace BasicCRUDTool3.Business
             }
         }
 
-        public void AddAlbum(AlbumBE album)
+        public void AddToAlbum(AlbumBE album)
         {
             album.AssignTo(this);
         }
@@ -59,7 +59,7 @@ namespace BasicCRUDTool3.Business
 
         public override string ToString()
         {
-            return Name;
+            return $"Artist Name: {Name}";
         }
         #endregion
     }

@@ -143,9 +143,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             trackBE.Save();
 
             genreBE.Load(1);
-            var InvoiceLineBECollection = genreBE.GetTracks();
-            Assert.IsTrue(InvoiceLineBECollection.First().Id == 1);
-            Assert.IsTrue(InvoiceLineBECollection.First().GenreId == 1);
+            var TrackBECollection = genreBE.GetTracks();
+            Assert.IsTrue(TrackBECollection.First().Id == 1);
+            Assert.IsTrue(TrackBECollection.First().GenreId == 1);
         }
 
         /// <summary>

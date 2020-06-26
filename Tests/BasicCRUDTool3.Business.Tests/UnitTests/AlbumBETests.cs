@@ -177,9 +177,9 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             trackBE.Save();
 
             albumBE.Load(1);
-            var InvoiceLineBECollection = albumBE.GetTracks();
-            Assert.IsTrue(InvoiceLineBECollection.First().Id == 1);
-            Assert.IsTrue(InvoiceLineBECollection.First().AlbumId == 1);
+            var TrackBECollection = albumBE.GetTracks();
+            Assert.IsTrue(TrackBECollection.First().Id == 1);
+            Assert.IsTrue(TrackBECollection.First().AlbumId == 1);
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
 
             AlbumBE albumBE = new AlbumBE(cRUDTestDBContextProvider);
             albumBE.Load(1);
-            Assert.IsTrue(albumBE.ToString().Equals("Albumb Title: TestAlbumTitle"));
+            Assert.IsTrue(albumBE.ToString().Equals("Album Title: TestAlbumTitle"));
         }
     }
 }
