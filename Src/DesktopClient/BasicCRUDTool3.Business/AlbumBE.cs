@@ -13,6 +13,7 @@ namespace BasicCRUDTool3.Business
         [Required]
         [StringLength(160)]
         public string Title { get; set; }
+        public int ArtistId { get; private set; }
         public string ArtistName { get; private set; }
         public int TrackCount { get; private set;  }
         #endregion
@@ -36,7 +37,7 @@ namespace BasicCRUDTool3.Business
             }
         }
 
-        public void AddTrack(TrackBE track)
+        public void AddToTrack(TrackBE track)
         {
             track.AssignTo(this);
         }
@@ -51,6 +52,7 @@ namespace BasicCRUDTool3.Business
             base.Load(id);
 
             Title = Entity.Title;
+            ArtistId = Entity.ArtistId;
             ArtistName = Entity.Artist?.Name;
             TrackCount = Entity.Track.Count;
         }
