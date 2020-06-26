@@ -24,7 +24,7 @@ namespace BasicCRUDTool3.Business
         #region Public Methods
         public IEnumerable<TrackBE> GetTracks()
         {
-            var ids = Context.Track.Where(p => p.GenreId == Id).Select(p => p.TrackId);
+            var ids = Context.Track.Where(p => p.MediaTypeId == Id).Select(p => p.TrackId);
 
             foreach (var id in ids)
             {
@@ -34,7 +34,7 @@ namespace BasicCRUDTool3.Business
             }
         }
 
-        public void AddTrack(TrackBE track)
+        public void AddToTrack(TrackBE track)
         {
             track.AssignTo(this);
         }
@@ -60,7 +60,7 @@ namespace BasicCRUDTool3.Business
 
         public override string ToString()
         {
-            return Name;
+            return $"MediaType Name: {Name}";
         }
         #endregion
     }

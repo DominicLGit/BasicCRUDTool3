@@ -9,7 +9,7 @@ using System.Text;
 namespace BasicCRUDTool3.Business.Tests.UnitTests
 {
     [TestClass]
-    public class GenreBETests
+    public class MediaTypeBETests
     {
         /// <summary>
         /// Test for loading existing object from database with all attributes
@@ -20,27 +20,27 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var genre = new Genre
+            var mediaType = new MediaType
             {
-                Name = "TestGenreName",
-                GenreId = 1
+                Name = "TestMediaTypeName",
+                MediaTypeId = 1
             };
-            var genre2 = new Genre
+            var mediaType2 = new MediaType
             {
-                GenreId = 2
+                MediaTypeId = 2
             };
-            context.Add(genre);
-            context.Add(genre2);
+            context.Add(mediaType);
+            context.Add(mediaType2);
             context.SaveChanges();
 
-            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
-            genreBE.Load(1);
-            Assert.IsTrue(genreBE.Id == 1);
-            Assert.IsTrue(genreBE.Name == "TestGenreName");
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.Load(1);
+            Assert.IsTrue(mediaTypeBE.Id == 1);
+            Assert.IsTrue(mediaTypeBE.Name == "TestMediaTypeName");
 
-            GenreBE genreBE2 = new GenreBE(cRUDTestDBContextProvider);
-            genreBE2.Load(2);
-            Assert.IsTrue(genreBE2.Id == 2);
+            MediaTypeBE mediaTypeBE2 = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE2.Load(2);
+            Assert.IsTrue(mediaTypeBE2.Id == 2);
         }
 
         /// <summary>
@@ -51,22 +51,22 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var genre = new Genre
+            var mediaType = new MediaType
             {
-                GenreId = 1
+                MediaTypeId = 1
             };
-            context.Add(genre);
+            context.Add(mediaType);
             context.SaveChanges();
 
-            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
-            genreBE.Load(1);
-            genreBE.Name = "TestGenreName";
-            genreBE.Save();
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.Load(1);
+            mediaTypeBE.Name = "TestMediaTypeName";
+            mediaTypeBE.Save();
 
-            GenreBE genreBE2 = new GenreBE(cRUDTestDBContextProvider);
-            genreBE2.Load(1);
-            Assert.IsTrue(genreBE2.Id == 1);
-            Assert.IsTrue(genreBE2.Name == "TestGenreName");
+            MediaTypeBE mediaTypeBE2 = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE2.Load(1);
+            Assert.IsTrue(mediaTypeBE2.Id == 1);
+            Assert.IsTrue(mediaTypeBE2.Name == "TestMediaTypeName");
         }
 
         /// <summary>
@@ -76,12 +76,12 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         public void SaveWithoutIdTest()
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
-            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
-            genreBE.New();
-            genreBE.Name = "TestGenreName";
-            genreBE.Save();
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.New();
+            mediaTypeBE.Name = "TestMediaTypeName";
+            mediaTypeBE.Save();
 
-            Assert.IsTrue(genreBE.Id != default);
+            Assert.IsTrue(mediaTypeBE.Id != default);
         }
 
         /// <summary>
@@ -93,29 +93,29 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var genre = new Genre
+            var mediaType = new MediaType
             {
-                GenreId = 1
+                MediaTypeId = 1
             };
-            var genre2 = new Genre
+            var mediaType2 = new MediaType
             {
-                GenreId = 2
+                MediaTypeId = 2
             };
-            var track = new Track { TrackId = 1 , GenreId = 1, Name = "TestTrackName"};
-            context.Add(genre);
-            context.Add(genre2);
+            var track = new Track { TrackId = 1, GenreId = 1, Name = "TestTrackName" };
+            context.Add(mediaType);
+            context.Add(mediaType2);
             context.Add(track);
             context.SaveChanges();
 
-            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
-            GenreBE genreBE2 = new GenreBE(cRUDTestDBContextProvider);
-            genreBE.Load(1);
-            genreBE2.Load(2);
-            var TrackBECollection = genreBE.GetTracks();
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.Load(1);
+            MediaTypeBE mediaTypeBE2 = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE2.Load(2);
+            var TrackBECollection = mediaTypeBE.GetTracks();
             Assert.IsTrue(TrackBECollection.First().GetType() == typeof(TrackBE));
             Assert.IsTrue(TrackBECollection.First().Name == "TestTrackName");
             Assert.IsTrue(TrackBECollection.First().Id == 1);
-            Assert.IsTrue(genreBE2.GetTracks().IsNullOrEmpty());
+            Assert.IsTrue(mediaTypeBE2.GetTracks().IsNullOrEmpty());
         }
 
         /// <summary>
@@ -126,26 +126,26 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var genre = new Genre
+            var mediaType = new MediaType
             {
-                GenreId = 1
+                MediaTypeId = 1
             };
             var track = new Track { TrackId = 1, Name = "TestTrackName" };
-            context.Add(genre);
+            context.Add(mediaType);
             context.Add(track);
             context.SaveChanges();
 
             TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
-            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.Load(1);
             trackBE.Load(1);
-            genreBE.Load(1);
-            genreBE.AddToTrack(trackBE);
+            mediaTypeBE.AddToTrack(trackBE);
             trackBE.Save();
 
-            genreBE.Load(1);
-            var InvoiceLineBECollection = genreBE.GetTracks();
+            mediaTypeBE.Load(1);
+            var InvoiceLineBECollection = mediaTypeBE.GetTracks();
             Assert.IsTrue(InvoiceLineBECollection.First().Id == 1);
-            Assert.IsTrue(InvoiceLineBECollection.First().GenreId == 1);
+            Assert.IsTrue(InvoiceLineBECollection.First().MediaTypeId == 1);
         }
 
         /// <summary>
@@ -156,28 +156,28 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var genre = new Genre
+            var mediaType = new MediaType
             {
-                GenreId = 1
+                MediaTypeId = 1
             };
-            var track = new Track { TrackId = 1, GenreId = 1, Name = "TestTrackName" };
-            context.Add(genre);
+            var track = new Track { TrackId = 1, MediaTypeId = 1, Name = "TestTrackName" };
+            context.Add(mediaType);
             context.Add(track);
             context.SaveChanges();
 
-            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
-            genreBE.Load(1);
-            Assert.IsTrue(genreBE.TrackCount == 1);
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.Load(1);
+            Assert.IsTrue(mediaTypeBE.TrackCount == 1);
 
             TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
             trackBE.New();
             trackBE.Name = "TestName";
-            genreBE.AddToTrack(trackBE);
+            mediaTypeBE.AddToTrack(trackBE);
             trackBE.Save();
 
-            GenreBE genreBE2 = new GenreBE(cRUDTestDBContextProvider);
-            genreBE2.Load(1);
-            Assert.IsTrue(genreBE2.TrackCount == 2);
+            MediaTypeBE mediaTypeBE2 = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE2.Load(1);
+            Assert.IsTrue(mediaTypeBE2.TrackCount == 2);
         }
 
         /// <summary>
@@ -189,17 +189,17 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
 
-            var genre = new Genre
+            var mediaType = new MediaType
             {
-                GenreId = 1,
-                Name = "TestGenreName"
+                MediaTypeId = 1,
+                Name = "TestMediaTypeName"
             };
-            context.Add(genre);
+            context.Add(mediaType);
             context.SaveChanges();
 
-            GenreBE genreBE = new GenreBE(cRUDTestDBContextProvider);
-            genreBE.Load(1);
-            Assert.IsTrue(genreBE.ToString().Equals("GenreName: TestGenreName"));
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.Load(1);
+            Assert.IsTrue(mediaTypeBE.ToString().Equals("MediaType Name: TestMediaTypeName"));
         }
     }
 }
