@@ -101,7 +101,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             {
                 MediaTypeId = 2
             };
-            var track = new Track { TrackId = 1, GenreId = 1, Name = "TestTrackName" };
+            var track = new Track { TrackId = 1, MediaTypeId = 1, Name = "TestTrackName" };
             context.Add(mediaType);
             context.Add(mediaType2);
             context.Add(track);

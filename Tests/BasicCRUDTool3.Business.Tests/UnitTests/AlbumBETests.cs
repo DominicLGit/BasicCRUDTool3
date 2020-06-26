@@ -181,5 +181,37 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(InvoiceLineBECollection.First().Id == 1);
             Assert.IsTrue(InvoiceLineBECollection.First().AlbumId == 1);
         }
+
+        /// <summary>
+        /// Test for accurate TrackCount
+        /// </summary>
+        [TestMethod]
+        public void TrackCountTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+            var mediaType = new MediaType
+            {
+                MediaTypeId = 1
+            };
+            var track = new Track { TrackId = 1, MediaTypeId = 1, Name = "TestTrackName" };
+            context.Add(mediaType);
+            context.Add(track);
+            context.SaveChanges();
+
+            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE.Load(1);
+            Assert.IsTrue(mediaTypeBE.TrackCount == 1);
+
+            TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
+            trackBE.New();
+            trackBE.Name = "TestName";
+            mediaTypeBE.AddToTrack(trackBE);
+            trackBE.Save();
+
+            MediaTypeBE mediaTypeBE2 = new MediaTypeBE(cRUDTestDBContextProvider);
+            mediaTypeBE2.Load(1);
+            Assert.IsTrue(mediaTypeBE2.TrackCount == 2);
+        }
     }
 }
