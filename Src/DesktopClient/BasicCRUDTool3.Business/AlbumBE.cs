@@ -70,7 +70,7 @@ namespace BasicCRUDTool3.Business
 
         public override string ToString()
         {
-            return Title;
+            return $"Albumb Title: {Title}";
         }
         #endregion
     }

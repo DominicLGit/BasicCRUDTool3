@@ -190,28 +190,51 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
             var context = cRUDTestDBContextProvider.GetContext();
-            var mediaType = new MediaType
+            var album = new Album
             {
-                MediaTypeId = 1
+                Title = "TestAlbumTitle",
+                AlbumId = 1
             };
-            var track = new Track { TrackId = 1, MediaTypeId = 1, Name = "TestTrackName" };
-            context.Add(mediaType);
+            var track = new Track { TrackId = 1, AlbumId = 1, Name = "TestTrackName" };
+            context.Add(album);
             context.Add(track);
             context.SaveChanges();
 
-            MediaTypeBE mediaTypeBE = new MediaTypeBE(cRUDTestDBContextProvider);
-            mediaTypeBE.Load(1);
-            Assert.IsTrue(mediaTypeBE.TrackCount == 1);
+            AlbumBE albumBE = new AlbumBE(cRUDTestDBContextProvider);
+            albumBE.Load(1);
+            Assert.IsTrue(albumBE.TrackCount == 1);
 
             TrackBE trackBE = new TrackBE(cRUDTestDBContextProvider);
             trackBE.New();
             trackBE.Name = "TestName";
-            mediaTypeBE.AddToTrack(trackBE);
+            albumBE.AddToTrack(trackBE);
             trackBE.Save();
 
-            MediaTypeBE mediaTypeBE2 = new MediaTypeBE(cRUDTestDBContextProvider);
-            mediaTypeBE2.Load(1);
-            Assert.IsTrue(mediaTypeBE2.TrackCount == 2);
+            AlbumBE albumBE2 = new AlbumBE(cRUDTestDBContextProvider);
+            albumBE2.Load(1);
+            Assert.IsTrue(albumBE2.TrackCount == 2);
+        }
+
+        /// <summary>
+        /// Test for accurate ToString method
+        /// </summary>
+        [TestMethod]
+        public void ToStringTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+
+            var album = new Album
+            {
+                Title = "TestAlbumTitle",
+                AlbumId = 1
+            };
+            context.Add(album);
+            context.SaveChanges();
+
+            AlbumBE albumBE = new AlbumBE(cRUDTestDBContextProvider);
+            albumBE.Load(1);
+            Assert.IsTrue(albumBE.ToString().Equals("Albumb Title: TestAlbumTitle"));
         }
     }
 }
