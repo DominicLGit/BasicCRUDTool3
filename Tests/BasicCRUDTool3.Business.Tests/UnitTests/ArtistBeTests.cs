@@ -9,7 +9,7 @@ using System.Text;
 namespace BasicCRUDTool3.Business.Tests.UnitTests
 {
     [TestClass]
-    public class ArtistBeTests
+    public class ArtistBETests
     {
         /// <summary>
         /// Test for loading existing object from database with all attributes
