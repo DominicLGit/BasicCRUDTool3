@@ -111,10 +111,10 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             artistBE.Load(1);
             ArtistBE artistBE2 = new ArtistBE(cRUDTestDBContextProvider);
             artistBE2.Load(2);
-            var AlbumBECollection = artistBE.GetAlbums();
-            Assert.IsTrue(AlbumBECollection.First().GetType() == typeof(AlbumBE));
-            Assert.IsTrue(AlbumBECollection.First().Title == "TestAlbumTitle");
-            Assert.IsTrue(AlbumBECollection.First().Id == 1);
+            var albumBECollection = artistBE.GetAlbums();
+            Assert.IsTrue(albumBECollection.First().GetType() == typeof(AlbumBE));
+            Assert.IsTrue(albumBECollection.First().Title == "TestAlbumTitle");
+            Assert.IsTrue(albumBECollection.First().Id == 1);
             Assert.IsTrue(artistBE2.GetAlbums().IsNullOrEmpty());
         }
 

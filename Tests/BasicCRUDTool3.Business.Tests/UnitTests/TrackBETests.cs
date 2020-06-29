@@ -245,7 +245,7 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             trackBE.Load(1);
             trackBE2.Load(2);
             var playlistTrackBECollection = trackBE.GetPlaylistTracks();
-            Assert.IsTrue(playlistTrackBECollection.First().GetType() == typeof(PlaylistTrackBE));
+            Assert.IsTrue(playlistTrackBECollection.First().GetType() == typeof(PlaylistTrackBETests));
             Assert.IsTrue(playlistTrackBECollection.First().Id == (1,1));
             Assert.IsTrue(trackBE2.GetPlaylistTracks().IsNullOrEmpty());
         }

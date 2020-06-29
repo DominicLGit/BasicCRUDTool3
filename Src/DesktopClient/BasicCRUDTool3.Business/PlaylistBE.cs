@@ -63,7 +63,7 @@ namespace BasicCRUDTool3.Business
 
         public override string ToString()
         {
-            return Name;
+            return $"Playlist Name: {Name}";
         }
         #endregion
     }
