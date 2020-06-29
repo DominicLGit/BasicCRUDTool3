@@ -20,6 +20,15 @@ namespace BasicCRUDTool3.Data.Tests.UnitTests
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
+        public void InvalidOperationExceptionOnLoadIntIntOverloardIdDoesNotExist()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var activeRecordStub = new ActiveRecordStub<PlaylistTrack, (int, int)>(cRUDTestDBContextProvider);
+            activeRecordStub.Load((1,1), 1, 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void InvalidOperationExceptionOnDeleteIdDoesNotExist()
         {
             ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
@@ -53,5 +62,6 @@ namespace BasicCRUDTool3.Data.Tests.UnitTests
             }
             #endregion
         }
+
     }
 }
