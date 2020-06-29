@@ -66,5 +66,59 @@ namespace BasicCRUDTool3.Business.Tests.UnitTests
             Assert.IsTrue(playlistTrackBE2.Id == (2,2));
             Assert.IsTrue(playlistTrackBE2.TrackName == "TestTrackName");
         }
+
+        /// <summary>
+        /// Test for accurate ToString method
+        /// </summary>
+        [TestMethod]
+        public void ToStringTest()
+        {
+            ICRUDTestDBContextProvider cRUDTestDBContextProvider = new CRUDTestDBContextProvider(Guid.NewGuid().ToString());
+            var context = cRUDTestDBContextProvider.GetContext();
+
+            var playlistTrack = new PlaylistTrack
+            {
+                PlaylistId = 1,
+                TrackId = 1
+            };
+            var playlist = new Playlist
+            {
+                Name = "TestPlaylistName",
+                PlaylistId = 1
+            };
+            var track = new Track
+            {
+                TrackId = 1,
+                Name = "TestTrackName"
+            };
+            var playlistTrack2 = new PlaylistTrack
+            {
+                PlaylistId = 2,
+                TrackId = 2
+            };
+            var playlist2 = new Playlist
+            {
+                PlaylistId = 2
+            };
+            var track2 = new Track
+            {
+                TrackId = 2,
+                Name = "TestTrackName"
+            };
+            context.Add(playlistTrack);
+            context.Add(playlist);
+            context.Add(track);
+            context.Add(playlistTrack2);
+            context.Add(playlist2);
+            context.Add(track2);
+            context.SaveChanges();
+
+            PlaylistTrackBE playlistTrackBE = new PlaylistTrackBE(cRUDTestDBContextProvider);
+            playlistTrackBE.Load((1, 1), 1, 1);
+            PlaylistTrackBE playlistTrackBE2 = new PlaylistTrackBE(cRUDTestDBContextProvider);
+            playlistTrackBE2.Load((2, 2), 2, 2);
+            Assert.IsTrue(playlistTrackBE.ToString().Equals("Playlist Name: TestPlaylistName Track Name: TestTrackName"));
+            Assert.IsTrue(playlistTrackBE2.ToString().Equals("Playlist Name:  Track Name: TestTrackName"));
+        }
     }
 }
