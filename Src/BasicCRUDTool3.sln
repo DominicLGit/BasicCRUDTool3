@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCRUDTool3.Windows.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCRUDTool3.WPFDesktop.Tests", "..\Tests\BasicCRUDTool3.WPFDesktop.Tests\BasicCRUDTool3.WPFDesktop.Tests.csproj", "{659FB0CE-21A8-4DBA-83B4-93D243040E7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCRUDTool3.Business", "DesktopClient\BasicCRUDTool3.Business\BasicCRUDTool3.Business.csproj", "{644B44C4-EFFD-4B7D-86C8-0ADD84879CDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCRUDTool3.Business", "DesktopClient\BasicCRUDTool3.Business\BasicCRUDTool3.Business.csproj", "{644B44C4-EFFD-4B7D-86C8-0ADD84879CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCRUDTool3.Business.Tests", "..\Tests\BasicCRUDTool3.Business.Tests\BasicCRUDTool3.Business.Tests.csproj", "{0541A7F1-AF10-427C-8089-AC53EE21A9C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCRUDTool3.Business.Tests", "..\Tests\BasicCRUDTool3.Business.Tests\BasicCRUDTool3.Business.Tests.csproj", "{0541A7F1-AF10-427C-8089-AC53EE21A9C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCRUDTool3.BlazorApp", "DesktopClient\BasicCRUDTool3.BlazorApp\BasicCRUDTool3.BlazorApp.csproj", "{D0B03332-1E90-4252-BD5A-082B043D3F71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{0541A7F1-AF10-427C-8089-AC53EE21A9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0541A7F1-AF10-427C-8089-AC53EE21A9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0541A7F1-AF10-427C-8089-AC53EE21A9C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0B03332-1E90-4252-BD5A-082B043D3F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B03332-1E90-4252-BD5A-082B043D3F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B03332-1E90-4252-BD5A-082B043D3F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B03332-1E90-4252-BD5A-082B043D3F71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{659FB0CE-21A8-4DBA-83B4-93D243040E7D} = {5D9B01F4-1E50-4929-9C7C-5CD07E49471B}
 		{644B44C4-EFFD-4B7D-86C8-0ADD84879CDE} = {08A51D55-D8D7-4CFE-81DB-A6F3680171E2}
 		{0541A7F1-AF10-427C-8089-AC53EE21A9C0} = {5D9B01F4-1E50-4929-9C7C-5CD07E49471B}
+		{D0B03332-1E90-4252-BD5A-082B043D3F71} = {08A51D55-D8D7-4CFE-81DB-A6F3680171E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4EC33238-158E-4028-AD0E-491632ECA8A2}
