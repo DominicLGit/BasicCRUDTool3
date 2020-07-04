@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCRUDTool3.Business", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCRUDTool3.Business.Tests", "..\Tests\BasicCRUDTool3.Business.Tests\BasicCRUDTool3.Business.Tests.csproj", "{0541A7F1-AF10-427C-8089-AC53EE21A9C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCRUDTool3.BlazorApp", "DesktopClient\BasicCRUDTool3.BlazorApp\BasicCRUDTool3.BlazorApp.csproj", "{D0B03332-1E90-4252-BD5A-082B043D3F71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicCRUDTool3.BlazorApp", "DesktopClient\BasicCRUDTool3.BlazorApp\BasicCRUDTool3.BlazorApp.csproj", "{D0B03332-1E90-4252-BD5A-082B043D3F71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
