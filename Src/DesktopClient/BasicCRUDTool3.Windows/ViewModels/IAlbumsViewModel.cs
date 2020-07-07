@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BasicCRUDTool3.Windows.VIewModels
+namespace BasicCRUDTool3.Windows.ViewModels
 {
-    public interface IAlbumViewModel
+    public interface IAlbumsViewModel
     {
         public AlbumBE[] Albums { get; set; }
     }

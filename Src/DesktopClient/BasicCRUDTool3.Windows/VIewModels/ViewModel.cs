@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-
+using System.Linq;
 
 namespace BasicCRUDTool3.Windows
 {
@@ -30,9 +30,17 @@ namespace BasicCRUDTool3.Windows
             };
 
             var results = new Collection<ValidationResult>();
-            var isValid = Validator.TryValidateObject(this, context, results, true);
+            bool isValid = Validator.TryValidateObject(this, context, results, true);
 
-            return !isValid ? results[0].ErrorMessage : null;
+            if (!isValid)
+            {
+                ValidationResult result = results.SingleOrDefault(p
+                    => p.MemberNames.Any(memberName => memberName == propertyName));
+
+                return result == null ? null : result.ErrorMessage;
+            }
+
+            return null;
         }
     }
 }

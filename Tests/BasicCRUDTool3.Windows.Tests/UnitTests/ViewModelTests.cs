@@ -5,6 +5,7 @@
     using System;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Security.Cryptography.X509Certificates;
 
     [TestClass]
     public class ViewModelTests
@@ -57,10 +58,25 @@
             Assert.IsNull(viewModel["RequiredProperty"]);
         }
 
+        [TestMethod]
+        public void IndexerReturnsErrorMessageForRequestedInvalidProperty()
+        {
+            var viewModel = new StubViewModel
+            {
+                RequiredProperty = null,
+                SomeOtherProperty = null
+            };
+
+            var msg = viewModel["SomeOtherProperty"];
+            Assert.AreEqual("The SomeOtherProperty field is required.", msg);
+        }
+
         class StubViewModel : ViewModel
         {
             [Required]
             public string RequiredProperty { get; set; }
+            [Required]
+            public string SomeOtherProperty { get; set; }
         }
     }
 }
