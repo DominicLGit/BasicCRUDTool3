@@ -37,7 +37,7 @@ namespace BasicCRUDTool3.Windows
                 ValidationResult result = results.SingleOrDefault(p
                     => p.MemberNames.Any(memberName => memberName == propertyName));
 
-                return result == null ? null : result.ErrorMessage;
+                return result?.ErrorMessage;
             }
 
             return null;
