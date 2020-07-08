@@ -17,12 +17,7 @@ namespace BasicCRUDTool3.Windows.Commands
 
         public ActionCommand(Action<Object> action, Predicate<Object> predicate)
         {
-            if (action == null)
-            {
-                throw new ArgumentNullException("action", "You must specify an Actioni<T>.");
-            }
-
-            this.action = action;
+            this.action = action ?? throw new ArgumentNullException("action", "You must specify an Actioni<T>.");
             this.predicate = predicate;
         }
 
