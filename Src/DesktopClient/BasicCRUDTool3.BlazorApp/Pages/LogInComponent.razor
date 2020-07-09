@@ -1,0 +1,42 @@
+﻿@page "/LogIn"
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h4 class="card-title mb-4 mt-1">Log in</h4>
+                <EditForm Model="@logInViewModel">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="form-group">
+                        <label>User ID</label>
+                        <InputText class="form-control" placeholder="User ID" type="text" @bind-Value="@logInViewModel.UserID" />
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <label>Database</label>
+                        <InputText @bind-Value="@logInViewModel.Database" class="form-control" placeholder="Database" type="text" />
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <label>Host</label>
+                        <InputText class="form-control" placeholder="Host" type="text" @bind-Value="@logInViewModel.Host" />
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <label>Password</label>
+                        <InputText class="form-control" placeholderpassword type="password" @bind-Value="@logInViewModel.Password" />
+                    </div> <!-- form-group// -->
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                    </div> <!-- form-group// -->
+                </EditForm>
+            </div>
+        </div>
+    </div>
+
+    @code {
+        private LogInViewModel logInViewModel = null;
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            logInViewModel = new LogInViewModel();
+        }
+    }

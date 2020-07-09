@@ -10,7 +10,7 @@ using System.Text;
 namespace BasicCRUDTool3.Business.Tests.UnitTests
 {
     [TestClass]
-    public class BusinessEntityTets
+    public class BusinessEntityTests
     {
         [TestMethod]
         [ExpectedException(typeof(ValidationException))]

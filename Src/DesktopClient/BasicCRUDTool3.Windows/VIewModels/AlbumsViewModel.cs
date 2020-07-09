@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace BasicCRUDTool3.Windows.ViewModels
 {
@@ -9,11 +10,11 @@ namespace BasicCRUDTool3.Windows.ViewModels
     {
         #region Public Properties
         public AlbumBE[] Albums { get; set; }
-        public int AlbumID { get; set; } = 1;
-        public int ArtistID { get; set; } = 1;
-        public int TrackCount { get; set; } = 1;
-        public string Title { get; set; } = "TestAlumTitle";
-        public string ArtistName { get; set; } = "TestArtistName";
         #endregion
+
+        public AlbumsViewModel()
+        {
+            //Albums = new Business.Business().GetAlbumBEs();
+        }
     }
 }
