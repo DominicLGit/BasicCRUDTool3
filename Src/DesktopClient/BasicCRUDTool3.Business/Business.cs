@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace BasicCRUDTool3.Business
 {
+    /// <summary>
+    /// Aggregate class to retrieve all Business Entities of a specific type. 
+    /// </summary>
     public class Business
     {
         #region Private members
