@@ -187,7 +187,7 @@ namespace BasicCRUDTool3.Business
             {
                 PlaylistTrackBE playlistTrackBE = new PlaylistTrackBE(cRUDTestDBContextProvider);
 
-                playlistTrackBE.Load(id);
+                playlistTrackBE.Load(id, id.Item1, id.Item2);
 
                 yield return playlistTrackBE;
             }
