@@ -17,7 +17,7 @@ environment:
   COVERALLS_SERVICE_NAME: appveyor
     
 test_script:
- - dotnet test --collect:"XPlat Code Coverage" -r C:\\projects\\basiccrudtool3\\Tests\\Results
+ - dotnet test -c Release --collect:"XPlat Code Coverage" -r C:\\projects\\basiccrudtool3\\Tests\\Results
  
 after_test:
  - cd C:\\projects\\basiccrudtool3\\Tests
