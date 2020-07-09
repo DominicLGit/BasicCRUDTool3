@@ -53,7 +53,17 @@
                 RequiredProperty = "Some Value"
             };
 
+            Assert.IsNull(viewModel["RequiredProperty"]);
+        }
 
+        [TestMethod]
+        public void IndexerPropertyValidatesPropertyNameWithAllValidValues()
+        {
+            var viewModel = new StubViewModel
+            {
+                RequiredProperty = "Some Value",
+                SomeOtherProperty = "Some Other Value"
+            };
 
             Assert.IsNull(viewModel["RequiredProperty"]);
         }

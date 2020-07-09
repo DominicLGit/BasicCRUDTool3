@@ -21,7 +21,7 @@ namespace BasicCRUDTool3.Windows.Tests.UnitTests
         {
             var invoked = false;
 
-            Action<Object> action = obj => invoked = true;
+            void action(object obj) => invoked = true;
 
             var command = new ActionCommand(action);
 
@@ -35,11 +35,11 @@ namespace BasicCRUDTool3.Windows.Tests.UnitTests
         {
             var invoked = false;
 
-            Action<Object> action = obj => 
-            { 
+            void action(object obj)
+            {
                 Assert.IsNotNull(obj);
                 invoked = true;
-            };
+            }
 
             var command = new ActionCommand(action);
 
