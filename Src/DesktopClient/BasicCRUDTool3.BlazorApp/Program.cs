@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using BasicCRUDTool3.Data.Models;
+using BasicCRUDTool3.Windows;
 
 namespace BasicCRUDTool3.BlazorApp
 {
@@ -18,6 +20,8 @@ namespace BasicCRUDTool3.BlazorApp
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddSingleton<ISQLConnectionCredentials, SQLConnectionCredentials>();
+            builder.Services.AddSingleton<ICRUDTestDBContextProvider, CRUDTestDBContextProvider>();
 
             await builder.Build().RunAsync();
         }
