@@ -28,6 +28,6 @@ namespace BasicCRUDTool3.Windows
                 .UseLazyLoadingProxies();
 
             return new CRUDTestDBContext(option.Options);
-        
+        }
     }
 }
