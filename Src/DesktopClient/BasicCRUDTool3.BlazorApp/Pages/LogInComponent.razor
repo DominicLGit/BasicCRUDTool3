@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <h4 class="card-title mb-4 mt-1">Log in</h4>
-                <EditForm Model="@logInViewModel" OnValidSubmit="logInViewModel.OnSubmit">
+                <EditForm Model="@logInViewModel">
                     <DataAnnotationsValidator />
                     <ValidationSummary />
                     <div class="form-group">
@@ -33,10 +33,4 @@
 
     @code {
         private LogInViewModel logInViewModel = null;
-
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
-            logInViewModel = new LogInViewModel();
-        }
     }
