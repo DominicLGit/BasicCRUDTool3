@@ -25,15 +25,15 @@ namespace BasicCRUDTool3.Windows.ViewModels
         public string Password { get; set; }
         #endregion
 
-        public void SetSQLConnectionCredentials()
+/*        public void SetSQLConnectionCredentials()
         {
             SQLConnectionCredentials.UserID = UserID;
             SQLConnectionCredentials.Database = Database;
             SQLConnectionCredentials.Host = Host;
             SQLConnectionCredentials.Password = Password;
-        }
+        }*/
 
-        public bool AreCredentialsValid()
+/*        public bool AreCredentialsValid()
         {
 
             string connectionString = $"Host={Host};Database={Database};Username={UserID};Password={Password}";
@@ -53,9 +53,9 @@ namespace BasicCRUDTool3.Windows.ViewModels
                 Console.WriteLine(e.Message);
                 return false;
             }
-        }
+        }*/
 
-        public void OnSubmit()
+/*        public void OnSubmit()
         {
             if (AreCredentialsValid())
             {
@@ -66,6 +66,6 @@ namespace BasicCRUDTool3.Windows.ViewModels
             {
                 Console.WriteLine("Connection Invalid");
             }
-        }
+        }*/
     }
 }
