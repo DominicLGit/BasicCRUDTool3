@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using System.Security;
 
-namespace BasicCRUDTool3.Windows
+namespace BasicCRUDTool3.Blazor.Server
 {
     public class CRUDTestDBContextProvider : ICRUDTestDBContextProvider
     {
