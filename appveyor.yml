@@ -23,5 +23,5 @@ after_test:
  - cd C:\\projects\\basiccrudtool3\\Tests
  - cmd: python .\moveCoverageResults.py
  - cd C:\\projects\\basiccrudtool3\\Tests\\Results
- - ..\..\Tools\reportgenerator\4.6.1\tools\netcoreapp3.0\ReportGenerator.exe "-reports:1.xml;2.xml;3.xml;4.xml" "-targetdir:coveragereport" -reporttypes:Cobertura
+ - ..\..\Tools\reportgenerator\4.6.1\tools\netcoreapp3.0\ReportGenerator.exe "-reports:1.xml;2.xml;3.xml;4.xml;5.xml" "-targetdir:coveragereport" -reporttypes:Cobertura
  - ..\..\Tools\coveralls.io\1.4.2\tools\coveralls.net.exe --cobertura coveragereport\Cobertura.xml -r %COVERALLS_REPO_TOKEN%

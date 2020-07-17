@@ -45,16 +45,22 @@ namespace BasicCRUDTool3.Blazor.Server.Controllers
 
         // POST: api/<controller>
         [HttpGet("create")]
-        public void Post([FromBody] AlbumBE albumBE)
+        public void Post([FromBody] AlbumBEDTO albumBEDTO)
         {
+            AlbumBE albumBE = new AlbumBE(cRUDTestDBContextProvider);
+            albumBE.New();
+            mapper.Map<AlbumBEDTO, AlbumBE>(albumBEDTO, albumBE);
             if (ModelState.IsValid)
                 albumBE.Save();
         }
 
         // PUT: api/<controller>/5
         [HttpGet("edit")]
-        public void Put([FromBody] AlbumBE albumBE)
+        public void Put([FromBody] AlbumBEDTO albumBEDTO)
         {
+            AlbumBE albumBE = new AlbumBE(cRUDTestDBContextProvider);
+            albumBE.Load(albumBEDTO.Id);
+            mapper.Map<AlbumBEDTO, AlbumBE>(albumBEDTO, albumBE);
             if (ModelState.IsValid)
                 albumBE.Save();
         }
