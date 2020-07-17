@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BasicCRUDTool3.Blazor.Shared.DTO
 {
-    public class MediaTypeBEDTOcs
+    public class MediaTypeBEDTO
     {
         #region Public Properties
         public int Id { get; set; }

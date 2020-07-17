@@ -9,6 +9,7 @@ using BasicCRUDTool3.Data.Models;
 
 namespace BasicCRUDTool3.Blazor.Server.Controllers
 {
+    //TODO: Add validation
     [Route("api/[controller]")]
     [ApiController]
     public class AlbumsController : ControllerBase

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using BasicCRUDTool3.Data.Models;
+using AutoMapper;
 
 namespace BasicCRUDTool3.Blazor.Server
 {
@@ -26,6 +27,7 @@ namespace BasicCRUDTool3.Blazor.Server
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddAutoMapper();
             services.AddSingleton<ISQLConnectionCredentials, SQLConnectionCredentials>();
             services.AddSingleton<ICRUDTestDBContextProvider, CRUDTestDBContextProvider>();
         }
