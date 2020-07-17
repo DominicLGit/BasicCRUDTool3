@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BasicCRUDTool3.Business;
 using BasicCRUDTool3.Data.Models;
+using BasicCRUDTool3.Blazor.Shared.DTO;
+using AutoMapper;
 
 namespace BasicCRUDTool3.Blazor.Server.Controllers
 {
@@ -15,26 +17,30 @@ namespace BasicCRUDTool3.Blazor.Server.Controllers
     public class AlbumsController : ControllerBase
     {
         private readonly ICRUDTestDBContextProvider cRUDTestDBContextProvider;
+        private readonly IMapper mapper;
 
-        public AlbumsController(ICRUDTestDBContextProvider cRUDTestDBContextProvider)
+        public AlbumsController(ICRUDTestDBContextProvider cRUDTestDBContextProvider, IMapper mapper)
         {
             this.cRUDTestDBContextProvider = cRUDTestDBContextProvider;
+            this.mapper = mapper;
         }
 
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<AlbumBE> GetAlbums()
+        public IEnumerable<AlbumBEDTO> GetAlbums()
         {
-            return new Business.Business(cRUDTestDBContextProvider).GetAlbumBEs();
+            IEnumerable<AlbumBE> AlbumBEs = new Business.Business(cRUDTestDBContextProvider).GetAlbumBEs();
+            return mapper.Map<IEnumerable<AlbumBE>, IEnumerable<AlbumBEDTO>>(AlbumBEs);
         }
 
         // GET: api/<controller>/5
         [HttpGet("detail/ {id}")]
-        public AlbumBE GetAlbum(int id)
+        public AlbumBEDTO GetAlbum(int id)
         {
             AlbumBE albumBE = new AlbumBE(cRUDTestDBContextProvider);
             albumBE.Load(id);
-            return albumBE;
+            AlbumBEDTO albumBEDTO = mapper.Map<AlbumBE, AlbumBEDTO>(albumBE);
+            return albumBEDTO;
         }
 
         // POST: api/<controller>

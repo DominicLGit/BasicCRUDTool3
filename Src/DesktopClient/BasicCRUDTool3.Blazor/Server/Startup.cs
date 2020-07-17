@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
 using BasicCRUDTool3.Data.Models;
+using BasicCRUDTool3.Blazor.Shared.MappingProfiles;
 using AutoMapper;
 
 namespace BasicCRUDTool3.Blazor.Server
@@ -24,10 +25,9 @@ namespace BasicCRUDTool3.Blazor.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(BusinessEntityDTOMapping));
             services.AddSingleton<ISQLConnectionCredentials, SQLConnectionCredentials>();
             services.AddSingleton<ICRUDTestDBContextProvider, CRUDTestDBContextProvider>();
         }
