@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BasicCRUDTool3.Business;
 using BasicCRUDTool3.Data.Models;
-using BasicCRUDTool3.Blazor.Shared.DTO;
+using BasicCRUDTool3.Windows.DTO;
 using AutoMapper;
+using BasicCRUDTool3.Blazor.Server.Services;
+using BasicCRUDTool3.Blazor.Server.Extensions;
 
 namespace BasicCRUDTool3.Blazor.Server.Controllers
 {
@@ -18,20 +20,36 @@ namespace BasicCRUDTool3.Blazor.Server.Controllers
     {
         private readonly ICRUDTestDBContextProvider cRUDTestDBContextProvider;
         private readonly IMapper mapper;
+        private readonly IAlbumsService albumsService;
 
-        public AlbumsController(ICRUDTestDBContextProvider cRUDTestDBContextProvider, IMapper mapper)
+        public AlbumsController(ICRUDTestDBContextProvider cRUDTestDBContextProvider, 
+            IMapper mapper, 
+            IAlbumsService albumsService)
         {
             this.cRUDTestDBContextProvider = cRUDTestDBContextProvider;
             this.mapper = mapper;
+            this.albumsService = albumsService;
         }
 
         // GET: api/<controller>
         [HttpGet]
         public IEnumerable<AlbumBEDTO> GetAlbums()
         {
-            IEnumerable<AlbumBE> AlbumBEs = new Business.Business(cRUDTestDBContextProvider).GetAlbumBEs();
-            return mapper.Map<IEnumerable<AlbumBE>, IEnumerable<AlbumBEDTO>>(AlbumBEs);
+            try
+            {
+                IEnumerable<AlbumBE> albumBEs = new Business.Business(cRUDTestDBContextProvider).GetAlbumBEs();
+                return mapper.Map<IEnumerable<AlbumBE>, IEnumerable<AlbumBEDTO>>(albumBEs);
+            }
+            catch
+            {
+                return new List<AlbumBEDTO>();
+            }
+            
         }
+
+        // GET: api/<controller>/get/5
+        [HttpGet("get/{num}")]
+        public async Task<IActionResult> GetNumberOfAlbums(int num) => await albumsService.TryGetNumberOfAlbums(num).ToActionResult();
 
         // GET: api/<controller>/5
         [HttpGet("detail/ {id}")]

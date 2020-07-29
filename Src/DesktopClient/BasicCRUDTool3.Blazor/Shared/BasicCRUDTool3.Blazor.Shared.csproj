@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BasicCRUDTool3.Business\BasicCRUDTool3.Business.csproj" />
+    <ProjectReference Include="..\..\BasicCRUDTool3.Windows\BasicCRUDTool3.Windows.csproj" />
   </ItemGroup>
 
 </Project>

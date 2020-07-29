@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace BasicCRUDTool3.Blazor.Shared.DTO
+namespace BasicCRUDTool3.Windows.DTO
 {
     public class InvoiceLineBEDTO
     {

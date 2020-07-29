@@ -38,6 +38,8 @@ namespace BasicCRUDTool3.Business
 
                 yield return albumBE;
             }
+
+            yield break;
         }
 
         /// <summary>

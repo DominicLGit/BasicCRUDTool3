@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BasicCRUDTool3.Blazor.Shared.DTO
+namespace BasicCRUDTool3.Windows.DTO
 {
     public class PlaylistTrackBEDTO
     {

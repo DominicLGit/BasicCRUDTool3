@@ -9,6 +9,7 @@ using System.Linq;
 using BasicCRUDTool3.Data.Models;
 using BasicCRUDTool3.Blazor.Shared.MappingProfiles;
 using AutoMapper;
+using BasicCRUDTool3.Blazor.Server.Services;
 
 namespace BasicCRUDTool3.Blazor.Server
 {
@@ -30,6 +31,7 @@ namespace BasicCRUDTool3.Blazor.Server
             services.AddAutoMapper(typeof(BusinessEntityDTOMapping));
             services.AddSingleton<ISQLConnectionCredentials, SQLConnectionCredentials>();
             services.AddSingleton<ICRUDTestDBContextProvider, CRUDTestDBContextProvider>();
+            services.AddSingleton<IAlbumsService, AlbumsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

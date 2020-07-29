@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FunctionalTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Src\DesktopClient\BasicCRUDTool3.Business\BasicCRUDTool3.Business.csproj" />
   </ItemGroup>
 

@@ -7,5 +7,6 @@ namespace BasicCRUDTool3.Blazor.Client.Pages
 {
     public partial class AlbumComponent
     {
+
     }
 }

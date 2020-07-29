@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using BasicCRUDTool3.Business;
-using BasicCRUDTool3.Blazor.Shared.DTO;
+using BasicCRUDTool3.Windows.DTO;
 
 namespace BasicCRUDTool3.Blazor.Shared.MappingProfiles
 {
