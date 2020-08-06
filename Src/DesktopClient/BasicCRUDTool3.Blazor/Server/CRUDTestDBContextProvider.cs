@@ -1,5 +1,6 @@
 ﻿using BasicCRUDTool3.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using System.Data.SqlClient;
 using System.Security;
 
@@ -14,17 +15,19 @@ namespace BasicCRUDTool3.Blazor.Server
         }
         public CRUDTestDBContext GetContext()
         {
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
+            NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder
             {
-                InitialCatalog = sQLConnectionCredentials.Database,
-                DataSource = sQLConnectionCredentials.Host,
+                Database = sQLConnectionCredentials.Database,
+                Host = sQLConnectionCredentials.Host,
                 Password = sQLConnectionCredentials.Password,
-                UserID = sQLConnectionCredentials.UserID
+                Username = sQLConnectionCredentials.UserID
             };
 
 
+
+
             var option = new DbContextOptionsBuilder<CRUDTestDBContext>()
-                .UseNpgsql(new SqlConnection(builder.ConnectionString))
+                .UseNpgsql(new NpgsqlConnection(builder.ConnectionString))
                 .UseLazyLoadingProxies();
 
             return new CRUDTestDBContext(option.Options);

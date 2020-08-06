@@ -1,5 +1,6 @@
 ﻿using BasicCRUDTool3.Data.Models;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using System.Data.SqlClient;
 using System.Security;
 
@@ -24,7 +25,7 @@ namespace BasicCRUDTool3.Windows
 
 
             var option = new DbContextOptionsBuilder<CRUDTestDBContext>()
-                .UseNpgsql(new SqlConnection(builder.ConnectionString))
+                .UseNpgsql(new NpgsqlConnection(builder.ConnectionString))
                 .UseLazyLoadingProxies();
 
             return new CRUDTestDBContext(option.Options);
