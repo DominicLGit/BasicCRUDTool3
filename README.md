@@ -4,4 +4,4 @@
 
 
 # BasicCRUDTool
-A simple tool for carrying out CRUD operations
+A CRUD application designed for the chinook SQL database on a PostgreSQL DBMS. The application is intended to run in a browser as a Blazor ASP.NET Core hosted application using a RESTful API as well as a .Net Core WPF application on Windows. 
